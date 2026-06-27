@@ -1,0 +1,15 @@
+{
+  "name": "proses",
+  "version": "0.1.0",
+  "description": "Operating systems you can see inside: processes, schedulers, page tables, disks and file systems, each a small machine you set up, run step by step and break.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node tests/run.mjs",
+    "diagrams": "node tools/check-diagrams.mjs",
+    "e2e": "node tests/e2e/run.mjs"
+  },
+  "author": "Jyotiprakash Mishra <mail@jyotiprakash.org>",
+  "license": "GPL-3.0-or-later"
+}

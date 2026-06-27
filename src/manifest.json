@@ -1,0 +1,1 @@
+{"core": ["core/*.js"], "stage": ["stage/geom.js", "stage/stage.js", "stage/kit-*.js", "stage/topics.js"], "demo": ["demo/scenes.js", "demo/*.js"], "topics": ["topics/*.js"], "app": ["app/ui.js", "app/*.js", "app/app.js"], "content": ["content/*.js"], "css": ["app/styles.css", "app/styles-*.css"]}
