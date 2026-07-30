@@ -1,0 +1,110 @@
+/* ---- SVG items ---- */
+.st-shape { fill: var(--node); stroke: var(--node-line); stroke-width: 1.6; }
+.st-ring { fill: none; stroke: var(--node-line); stroke-width: 1.6; }
+.st-text { font: 650 15px var(--font); fill: var(--node-text); }
+.st-sub { font: 500 12px var(--font); fill: var(--muted); }
+.it.dim { opacity: 0.42; }
+.it.pulse .st-shape, .it.pulse .cell-box, .it.pulse .op-shape { animation: pulse 0.9s ease-out; }
+.edge-path { fill: none; stroke: var(--edge); stroke-width: 1.8; stroke-linecap: round; }
+.arrowhead { fill: var(--edge); }
+.edge-label { font: 600 14px var(--font); fill: var(--text); paint-order: stroke; stroke: var(--st-bg); stroke-width: 5px; stroke-linejoin: round; }
+.it-edge.hot .edge-path { stroke: var(--hot); stroke-width: 2.6; }
+.it-edge.act .edge-path { stroke: var(--act); stroke-width: 2.4; }
+
+.cell-box { fill: var(--node); stroke: var(--node-line); stroke-width: 1.2; }
+.cell-text { font: 600 16px var(--font); fill: var(--node-text); }
+.cell-sub { font: 500 11px var(--mono); fill: var(--muted); }
+.it-cell.mono .cell-text, .it-cell.hex .cell-text { font-family: var(--mono); }
+.it-cell.hex .cell-text { font-weight: 600; letter-spacing: 0.01em; }
+.it-cell.head .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.head .cell-text { font-weight: 700; fill: var(--muted); font-size: 13px; }
+.it-cell.nobox .cell-box { fill: none; stroke: none; }
+.it-cell.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.4; }
+.it-cell.act .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 2.2; }
+.it-cell.act .cell-text { fill: var(--act-deep); }
+.it-cell.changed .cell-box { fill: var(--hot-soft); }
+.it-cell.muted .cell-text { fill: var(--muted); font-weight: 500; }
+.it-cell.soft .cell-box { fill: var(--surface2); }
+.it-cell.bit .cell-text { font: 600 13px var(--mono); }
+.it-cell.panel .cell-box { fill: var(--surface); stroke: var(--border); }
+.it-cell.tab .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.tab .cell-text { font-size: 13px; font-weight: 700; fill: var(--muted); }
+
+.free-text { font: 500 14px var(--font); fill: var(--muted); }
+.it-text.title .free-text { font: 700 13px var(--font); fill: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
+.it-text.big .free-text { font-size: 20px; font-weight: 700; fill: var(--text); }
+.it-text.mono .free-text { font-family: var(--mono); fill: var(--text); font-weight: 600; }
+.it-text.strong .free-text { fill: var(--text); font-weight: 650; }
+.it-text.math .free-text { font-family: var(--mono); fill: var(--text); font-weight: 500; }
+.it-text.good .free-text { fill: var(--good); font-weight: 700; }
+.it-text.hot .free-text { fill: var(--hot-deep); font-weight: 700; }
+.it-text.act .free-text { fill: var(--act); font-weight: 700; }
+.it-text.heat .free-text { fill: var(--accent); font-weight: 700; }
+.region-box { fill: color-mix(in srgb, var(--surface2) 70%, transparent); stroke: var(--border); stroke-width: 1.2; }
+.region-text { font: 700 12px var(--font); fill: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
+.it-region.panel .region-box { fill: var(--surface); stroke: var(--border); }
+.it-region.act .region-box { fill: color-mix(in srgb, var(--act) 6%, var(--st-bg)); stroke: color-mix(in srgb, var(--act) 45%, transparent); stroke-dasharray: 5 4; }
+.it-region.hot .region-box { fill: color-mix(in srgb, var(--hot) 8%, var(--st-bg)); stroke: var(--hot); stroke-width: 1.8; }
+.it-region.frame .region-box { fill: none; stroke: var(--node-line); stroke-dasharray: 5 5; }
+.it-region.lens .region-box { fill: color-mix(in srgb, var(--act) 10%, transparent); stroke: var(--act); stroke-width: 2; }
+.plain-line { stroke: var(--node-line); stroke-width: 1.4; }
+.it-line.hot .plain-line { stroke: var(--hot); stroke-width: 2.4; }
+.it-line.act .plain-line { stroke: var(--act); stroke-width: 2; }
+.it-line.dash .plain-line { stroke-dasharray: 5 5; }
+.it-line.rule .plain-line { stroke: var(--text); stroke-width: 1.4; }
+.it-line.faint .plain-line { stroke: var(--border); stroke-width: 1; }
+.token-dot { fill: var(--hot); stroke: var(--surface); stroke-width: 2; }
+.token-text { font: 700 11px var(--font); fill: #1b1300; }
+.head-tag { fill: var(--act); }
+.head-text { font: 700 13px var(--font); fill: var(--accent-text); }
+.it-head.hot .head-tag { fill: var(--hot); } .it-head.hot .head-text { fill: #1b1300; }
+.bracket-path { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+.bracket-text { font: 600 13px var(--font); fill: var(--muted); }
+.it-bracket.act .bracket-path { stroke: var(--act); } .it-bracket.act .bracket-text { fill: var(--act); }
+.it-bracket.hot .bracket-path { stroke: var(--hot); } .it-bracket.hot .bracket-text { fill: var(--hot-deep); }
+
+/* data flow: wires, blocks, operators, values riding along */
+.wire-path { fill: none; stroke: var(--wire); stroke-width: 1.7; stroke-linejoin: miter; stroke-linecap: butt; }
+.it-wire.bus .wire-path { stroke-width: 3; }
+.it-wire.act .wire-path { stroke: var(--act); stroke-width: 2.4; }
+.it-wire.act.bus .wire-path { stroke-width: 3.4; }
+.it-wire.hot .wire-path { stroke: var(--hot); stroke-width: 2.4; }
+.it-wire.faint .wire-path { stroke: var(--node-line); stroke-dasharray: 4 4; stroke-width: 1.3; }
+.it-wire.tick .wire-path { stroke-width: 1.4; }
+.it-state.block .st-shape { fill: var(--node); stroke: var(--wire); stroke-width: 1.7; }
+.it-state.block .st-text { font: 650 15px var(--font); }
+.it-state.block.cipher .st-shape { fill: color-mix(in srgb, var(--act) 9%, var(--node)); stroke: var(--act); stroke-width: 2; }
+.it-state.block.cipher .st-text { fill: var(--act-deep); font-weight: 700; font-size: 17px; }
+.it-state.block.act .st-shape { fill: var(--act-soft); stroke: var(--act); stroke-width: 2.4; }
+.it-state.block.act .st-text { fill: var(--act-deep); }
+.it-state.block.hot .st-shape { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.4; }
+.it-state.block.val .st-text { font: 600 14px var(--mono); }
+.it-state.block.val .st-text:first-child { font-family: var(--font); }
+.it-state.block.small .st-text { font-size: 13px; }
+.it-state.block.soft .st-shape { fill: var(--surface2); stroke: var(--node-line); }
+.op-shape { fill: var(--node); stroke: var(--wire); stroke-width: 1.7; }
+.op-mark { fill: none; stroke: var(--wire); stroke-width: 1.7; }
+.it-op.act .op-shape { stroke: var(--act); stroke-width: 2.2; fill: var(--act-soft); } .it-op.act .op-mark { stroke: var(--act); stroke-width: 2.2; }
+.it-op.hot .op-shape { stroke: var(--hot); stroke-width: 2.2; fill: var(--hot-soft); } .it-op.hot .op-mark { stroke: var(--hot-deep); stroke-width: 2.2; }
+.chip-box { fill: var(--surface); stroke: var(--node-line); stroke-width: 1.2; }
+.chip-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-chip.act .chip-box { stroke: var(--act); fill: var(--act-soft); } .it-chip.act .chip-text { fill: var(--act-deep); }
+.it-chip.hot .chip-box { stroke: var(--hot); fill: var(--hot-soft); } .it-chip.hot .chip-text { fill: var(--hot-deep); }
+.it-chip.plain .chip-box { stroke: var(--border); }
+.dot-shape { fill: var(--wire); }
+.it-dot.pt .dot-shape { fill: var(--wire); stroke: var(--st-bg); stroke-width: 1.5; }
+.it-dot.cloud .dot-shape { fill: color-mix(in srgb, var(--wire) 55%, var(--st-bg)); }
+.free-path { fill: none; stroke: var(--wire); stroke-width: 1.6; }
+.it-path.curve .free-path { stroke: var(--text); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.it-path.axis .free-path { stroke: var(--node-line); stroke-width: 1.2; }
+.it-path.grid .free-path { stroke: var(--st-grid); stroke-width: 1; }
+.it-path.chord .free-path { stroke: var(--hot); stroke-width: 2; }
+.it-path.mirror .free-path { stroke: var(--good); stroke-width: 1.8; stroke-dasharray: 5 4; }
+.it-cell.ring .cell-box { stroke: var(--text); stroke-width: 2.6; }
+.it-path.hopwire .free-path { stroke: var(--wire); stroke-width: 1.7; fill: none; }
+.it-path.hopwire.act .free-path { stroke: var(--act); stroke-width: 2.4; }
+.it-text.tick .free-text { font: 500 13px var(--font); fill: var(--muted); font-variant-numeric: tabular-nums; }
+.it-text.ptname .free-text { font: 700 15px var(--font); fill: var(--text); paint-order: stroke; stroke: var(--st-bg); stroke-width: 4px; stroke-linejoin: round; }
+.it-text.eq .free-text { font: 500 16px var(--font); fill: var(--text); }
+.it-text.eq.good .free-text { fill: var(--good); font-weight: 700; } .it-text.eq.hot .free-text { fill: var(--hot-deep); font-weight: 700; }
+.it-text.eq.strong .free-text { font-weight: 700; }

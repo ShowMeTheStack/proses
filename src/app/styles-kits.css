@@ -1,0 +1,77 @@
+/* The drawing kits (src/stage/kit-*.js): plots and their series, heat maps, trees, and the small text and bar
+   kinds the scenes share. Each new kit adds its own section (or its own styles-kit-name.css). */
+/* plots */
+.it-text.tick .free-text { font: 500 12px var(--font); fill: var(--muted); font-variant-numeric: tabular-nums; }
+.it-text.axname .free-text { font: 600 13px var(--font); fill: var(--muted); }
+.it-text.legend .free-text { font: 600 13px var(--font); fill: var(--text); }
+.it-path.axis .free-path { stroke: var(--node-line); stroke-width: 1.3; fill: none; }
+.it-path.grid .free-path { stroke: var(--st-grid); stroke-width: 1; fill: none; }
+.it-path.guide .free-path { stroke: var(--node-line); stroke-width: 1.2; stroke-dasharray: 4 4; fill: none; }
+.it-path.guide.act .free-path { stroke: var(--accent); }
+.it-path.series .free-path { fill: none; stroke: var(--text); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+.it-path.series.c0 .free-path { stroke: var(--cls0); } .it-path.series.c1 .free-path { stroke: var(--cls1); }
+.it-path.series.c2 .free-path { stroke: var(--cls2); } .it-path.series.c3 .free-path { stroke: var(--cls3); }
+.it-path.series.act .free-path { stroke: var(--accent); }
+.it-path.series.faint .free-path { stroke: var(--node-line); stroke-width: 1.6; stroke-dasharray: 5 4; }
+.it-path.series.thin .free-path { stroke-width: 1.6; }
+.it-dot.mark .dot-shape { fill: var(--accent); stroke: var(--st-bg); stroke-width: 2; }
+.it-dot.mark.c0 .dot-shape { fill: var(--cls0); } .it-dot.mark.c1 .dot-shape { fill: var(--cls1); } .it-dot.mark.c2 .dot-shape { fill: var(--cls2); }
+.it-dot.swatch .dot-shape { fill: var(--muted); }
+.it-dot.ring .dot-shape { fill: none; stroke: var(--text); stroke-width: 2; }
+.it-dot.ring.act .dot-shape { stroke: var(--accent); stroke-width: 2.6; }
+.it-dot.ring.hot .dot-shape { stroke: var(--hot); stroke-width: 2.6; }
+.it-raster .ras-frame { fill: none; stroke: var(--border); stroke-width: 1; }
+/* heat maps */
+.it-cell.hm .cell-box { stroke: none; }
+.it-cell.hm .cell-text { font: 600 13px var(--mono); }
+.it-cell.hm.sel .cell-box { stroke: var(--text); stroke-width: 2.4; }
+.it-cell.hm.act .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.hm.pickable { cursor: pointer; }
+.it-text.hmname .free-text { font: 600 13px var(--font); fill: var(--muted); }
+.it-text.hmname.act .free-text { fill: var(--accent); font-weight: 700; }
+.it-text.hmname.mono .free-text { font-family: var(--mono); fill: var(--text); }
+/* trees */
+.it-state.tnode .st-shape { fill: var(--node); stroke: var(--node-line); stroke-width: 1.4; }
+.it-state.tnode .st-text { font: 600 13px var(--font); fill: var(--text); }
+.it-state.tnode .st-text:first-child { font-weight: 700; }
+.it-state.tnode.leaf .st-shape { fill: var(--surface2); }
+.it-state.tnode.act .st-shape { stroke: var(--accent); stroke-width: 2.6; fill: var(--accent-soft); }
+.it-state.tnode.leaf.c0 .st-shape { fill: var(--cls0-soft); stroke: var(--cls0); }
+.it-state.tnode.leaf.c1 .st-shape { fill: var(--cls1-soft); stroke: var(--cls1); }
+.it-cell.tbar .cell-box { stroke: none; }
+.it-cell.tbar.c0 .cell-box { fill: var(--cls0); } .it-cell.tbar.c1 .cell-box { fill: var(--cls1); }
+.it-edge.tedge .edge-path { stroke: var(--node-line); stroke-width: 1.8; }
+.it-edge.tedge .edge-label { font: 600 13px var(--mono); fill: var(--muted); }
+.it-edge.tedge.act .edge-path { stroke: var(--accent); stroke-width: 2.4; }
+/* small text kinds shared by the scenes */
+.it-text.good .free-text { fill: var(--good); font-weight: 700; }
+.it-text.bad .free-text { fill: var(--bad); font-weight: 700; }
+.it-text.c0 .free-text { fill: var(--cls0); font-weight: 700; }
+.it-text.c1 .free-text { fill: var(--cls1); font-weight: 700; }
+.it-text.c2 .free-text { fill: var(--cls2); font-weight: 700; }
+.it-text.pos .free-text { fill: var(--pos); font-weight: 700; } .it-text.neg .free-text { fill: var(--neg); font-weight: 700; }
+.it-cell.bar .cell-box { stroke: none; fill: color-mix(in srgb, var(--accent) 70%, var(--node)); }
+.it-cell.bar.c0 .cell-box { fill: var(--cls0); } .it-cell.bar.c1 .cell-box { fill: var(--cls1); }
+.it-cell.bar.soft .cell-box { fill: color-mix(in srgb, var(--node-line) 45%, var(--node)); }
+.it-cell.bar.pos .cell-box { fill: var(--pos); } .it-cell.bar.neg .cell-box { fill: var(--neg); }
+.it-cell.panel .cell-box { fill: var(--surface); stroke: var(--border); }
+.it-path.series.muted .free-path { stroke: var(--node-line); }/* the states of a process, and processes told apart: on a state circle or box (st-), a cell (cell-) or free text */
+.it-state.s-new .st-shape, .it-cell.s-new .cell-box { fill: var(--s-new-soft); stroke: var(--s-new); stroke-width: 2; }
+.it-state.s-ready .st-shape, .it-cell.s-ready .cell-box { fill: var(--s-ready-soft); stroke: var(--s-ready); stroke-width: 2; }
+.it-state.s-running .st-shape, .it-cell.s-running .cell-box { fill: var(--s-running-soft); stroke: var(--s-running); stroke-width: 2; }
+.it-state.s-blocked .st-shape, .it-cell.s-blocked .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); stroke-width: 2; }
+.it-state.s-zombie .st-shape, .it-cell.s-zombie .cell-box { fill: var(--s-zombie-soft); stroke: var(--s-zombie); stroke-width: 2; stroke-dasharray: 5 3; }
+.it-state.s-done .st-shape, .it-cell.s-done .cell-box { fill: var(--s-done-soft); stroke: var(--s-done); stroke-width: 2; }
+.it-state.act .st-shape, .it-cell.act .cell-box { stroke: var(--accent); stroke-width: 3; }
+.it-cell.p0 .cell-box { fill: color-mix(in srgb, var(--p0) 22%, var(--node)); stroke: var(--p0); }
+.it-cell.p1 .cell-box { fill: color-mix(in srgb, var(--p1) 22%, var(--node)); stroke: var(--p1); }
+.it-cell.p2 .cell-box { fill: color-mix(in srgb, var(--p2) 22%, var(--node)); stroke: var(--p2); }
+.it-cell.p3 .cell-box { fill: color-mix(in srgb, var(--p3) 22%, var(--node)); stroke: var(--p3); }
+.it-cell.p4 .cell-box { fill: color-mix(in srgb, var(--p4) 22%, var(--node)); stroke: var(--p4); }
+.it-cell.p5 .cell-box { fill: color-mix(in srgb, var(--p5) 22%, var(--node)); stroke: var(--p5); }
+.it-cell.free .cell-box { fill: var(--free); stroke: var(--border); }
+.it-cell.used .cell-box { fill: var(--used); stroke: var(--node-line); }
+.it-text.s-ready .free-text { fill: var(--s-ready); font-weight: 700; } .it-text.s-running .free-text { fill: var(--s-running); font-weight: 700; }
+.it-text.s-blocked .free-text { fill: var(--s-blocked); font-weight: 700; } .it-text.s-zombie .free-text { fill: var(--s-zombie); font-weight: 700; }
+.it-token.proc .token-dot { fill: var(--accent); stroke: var(--st-bg); stroke-width: 2.5; }
+.it-token.proc .token-text { fill: var(--accent-text); font: 700 14px var(--font); }
