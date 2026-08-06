@@ -1,0 +1,56 @@
+/* The Process lab (src/app/lab-process-*.js): the choices to click by hand, descriptor arrows, the page cells of
+   copy-on-write (shared against split), signal headers, the threads' machine step, and the "Every output" tab. */
+.it-state.pnode.pick .st-shape { stroke: var(--accent); stroke-width: 3; stroke-dasharray: 6 3; cursor: pointer; }
+.it-state.pnode.pick { cursor: pointer; }
+.it-cell.pickchip { cursor: pointer; }
+.it-cell.pickchip .cell-box { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
+.it-cell.pickchip .cell-text { font: 750 14px var(--font); fill: var(--accent-deep); }
+.it-cell.pickchip.p0 .cell-box { fill: color-mix(in srgb, var(--p0) 18%, var(--node)); stroke: var(--p0); }
+.it-cell.pickchip.p1 .cell-box { fill: color-mix(in srgb, var(--p1) 18%, var(--node)); stroke: var(--p1); }
+.it-cell.pickchip.p2 .cell-box { fill: color-mix(in srgb, var(--p2) 18%, var(--node)); stroke: var(--p2); }
+.it-cell.pickchip.p3 .cell-box { fill: color-mix(in srgb, var(--p3) 18%, var(--node)); stroke: var(--p3); }
+.it-cell.pickchip.p4 .cell-box { fill: color-mix(in srgb, var(--p4) 18%, var(--node)); stroke: var(--p4); }
+.it-cell.pickchip.p5 .cell-box { fill: color-mix(in srgb, var(--p5) 18%, var(--node)); stroke: var(--p5); }
+.it-cell.pickchip[class*=" p"] .cell-text { fill: var(--text); }
+.it-cell.pickchip.undo .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-dasharray: 4 3; }
+.it-cell.pickchip.undo .cell-text { fill: var(--muted); font-weight: 650; font-size: 13px; }
+.it-cell.pickchip:hover .cell-box { stroke-width: 3; }
+.it-text.chlab .free-text { font: 600 14px var(--font); fill: var(--muted); }
+.it-text.chlab.strong .free-text { fill: var(--accent-deep); font-weight: 750; }
+
+/* descriptors: each process's column, an arrow to its open-file entry */
+.it-text.fdhead .free-text { font: 750 13px var(--font); fill: var(--text); }
+.it-text.fdhead.p0 .free-text { fill: var(--p0); } .it-text.fdhead.p1 .free-text { fill: var(--p1); } .it-text.fdhead.p2 .free-text { fill: var(--p2); }
+.it-text.fdhead.p3 .free-text { fill: var(--p3); } .it-text.fdhead.p4 .free-text { fill: var(--p4); } .it-text.fdhead.p5 .free-text { fill: var(--p5); }
+.it-edge.fdarrow .edge-path { stroke: var(--node-line); stroke-width: 1.4; }
+.it-edge.fdarrow.act .edge-path { stroke: var(--accent); stroke-width: 2.4; }
+
+/* copy-on-write pages: shared frames (read-only) against a process's own copy */
+.it-text.pgnum .free-text { font: 700 13px var(--mono); fill: var(--muted); }
+.it-text.pgreg .free-text { font: 600 12px var(--font); fill: var(--muted); font-style: italic; }
+.it-cell.pgcell .cell-text { font: 650 13px var(--mono); fill: var(--text); }
+.it-cell.pgcell.shared .cell-box { fill: color-mix(in srgb, var(--p2) 20%, var(--node)); stroke: var(--p2); stroke-width: 1.6; stroke-dasharray: 5 3; }
+.it-cell.pgcell.own .cell-box { fill: color-mix(in srgb, var(--good) 18%, var(--node)); stroke: var(--good); stroke-width: 1.6; }
+.it-cell.pgcell.act .cell-box { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2.6; stroke-dasharray: none; }
+
+/* signals and threads */
+.it-text.sighead .free-text { font: 750 13px var(--mono); fill: var(--text); }
+.it-cell.sigcell.act .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+.it-text.msay .free-text { font: 650 14px var(--mono); fill: var(--hot-deep); }
+.it-text.msay.good .free-text { fill: var(--good); }
+
+/* the "Every output" tab */
+.pl-every-head .btn { margin: 8px 0 4px; }
+.pl-count { display: flex; align-items: baseline; gap: 6px; font-size: 15px; margin: 2px 0; }
+.pl-count b { font-size: 28px; color: var(--accent-deep); }
+.pl-outs { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.pl-out { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; background: var(--surface); }
+.pl-out.hangs { border-color: var(--bad); }
+.pl-out-h { display: flex; align-items: center; gap: 8px; }
+.pl-out-h .btn { margin-left: auto; }
+.pl-out-n { font: 700 13px var(--mono); color: var(--muted); }
+.pl-tag { font-size: 12px; font-weight: 700; padding: 1px 7px; border-radius: 9px; }
+.pl-tag.bad { color: var(--bad); border: 1px solid var(--bad); }
+.pl-out-text { margin: 6px 0; padding: 6px 8px; background: color-mix(in srgb, var(--text) 5%, var(--surface)); border-radius: 6px; font-size: 13px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.pl-sched { font-size: 13px; overflow-wrap: anywhere; }
+.pl-sched code { font-size: 12.5px; }
