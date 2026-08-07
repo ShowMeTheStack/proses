@@ -1,0 +1,53 @@
+/* The Shell lab (src/app/lab-shell-*.js): process groups as regions (the foreground one marked), pipes between the
+   processes of a job, the terminal tab with its input line, the tests with pass and fail, the hidden reference. */
+.it-region.jobgroup .region-box { fill: color-mix(in srgb, var(--text) 3%, transparent); stroke: var(--node-line); stroke-width: 1.3; stroke-dasharray: 6 4; }
+.it-region.jobgroup.fg .region-box { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2.2; stroke-dasharray: none; }
+.it-region.jobgroup.stopped .region-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); stroke-width: 2; }
+.it-text.joblab .free-text { font: 650 13px var(--font); fill: var(--muted); }
+.it-text.joblab.fg .free-text { fill: var(--accent-deep); font-weight: 750; }
+.it-text.joblab.stopped .free-text { fill: var(--s-blocked); font-weight: 750; }
+.it-cell.jobproc .cell-text { font: 650 13px var(--font); }
+.it-cell.jobproc.act .cell-box { stroke: var(--accent); stroke-width: 3; }
+.it-edge.jpipe .edge-path { stroke: var(--p0); stroke-width: 2.4; }
+.it-edge.jpipe.act .edge-path { stroke: var(--accent); stroke-width: 3; }
+.it-text.jpipelab .free-text { font: 700 13px var(--mono); fill: var(--p0); }
+.it-text.jpipelab.muted .free-text { fill: var(--muted); font-weight: 600; }
+.it-text.jobwarn .free-text { font: 650 13px var(--font); fill: var(--bad); }
+.it-text.jobnote.hot .free-text { font: 650 12px var(--font); fill: var(--hot-deep); }
+
+/* the terminal tab */
+.sl-term { display: flex; flex-direction: column; gap: 8px; }
+.sl-term-out { background: color-mix(in srgb, var(--text) 5%, var(--surface)); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; max-height: 260px; overflow-y: auto; font-size: 13px; line-height: 1.75; }
+.sl-row { display: flex; gap: 8px; align-items: baseline; min-width: 0; }
+.sl-row.you .sl-text { font-weight: 700; color: var(--accent-deep); }
+.sl-text { white-space: pre-wrap; overflow-wrap: anywhere; min-width: 0; }
+.sl-tags { display: inline-flex; gap: 3px; flex: none; }
+.sl-tag { font: 700 11.5px var(--font); padding: 0 6px; border-radius: 8px; border: 1px solid var(--node-line); background: var(--surface3); }
+.sl-prompt { font: 700 13px var(--mono); color: var(--accent-deep); flex: none; }
+.sl-form { display: flex; align-items: center; gap: 6px; }
+.sl-form input { flex: 1; min-width: 0; font-size: 14px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); }
+.sl-keys { display: flex; flex-wrap: wrap; gap: 6px; }
+.sl-sessions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+
+/* the tests tab */
+.sl-tests-head .btn { margin: 4px 0 6px; }
+.sl-tests { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-direction: column; gap: 8px; }
+.sl-test { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; background: var(--surface); }
+.sl-test.pass { border-color: color-mix(in srgb, var(--good) 60%, var(--border)); }
+.sl-test.fail { border-color: var(--bad); }
+.sl-test-h { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.sl-badge { font: 750 11.5px var(--font); text-transform: uppercase; letter-spacing: 0.05em; padding: 1px 7px; border-radius: 8px; border: 1px solid var(--border); color: var(--muted); }
+.sl-test.pass .sl-badge { color: var(--good); border-color: var(--good); }
+.sl-test.fail .sl-badge { color: var(--bad); border-color: var(--bad); }
+.sl-lines { white-space: pre-wrap; font-size: 12.5px; margin: 6px 0 2px; padding: 4px 8px; border-radius: 6px; background: color-mix(in srgb, var(--text) 5%, var(--surface)); overflow-wrap: anywhere; }
+.sl-why { color: var(--bad); font-size: 13.5px; margin: 6px 0; }
+.sl-details { margin-top: 6px; font-size: 13px; }
+.sl-details summary { cursor: pointer; color: var(--muted); font-weight: 650; }
+.sl-trace { max-height: 280px; overflow-y: auto; }
+
+/* the reference */
+.sl-ref-bar { display: flex; gap: 6px; margin-bottom: 8px; }
+.sl-ref { font-size: 12.5px; line-height: 1.5; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; }
+.sl-refl { display: flex; min-width: 0; }
+.sl-code { white-space: pre-wrap; overflow-wrap: anywhere; min-width: 0; flex: 1; }
+.sl-ln { flex: none; width: 30px; color: var(--muted); user-select: none; }
