@@ -1,0 +1,20 @@
+/* The Scheduler lab (src/app/lab-scheduler-*.js): a starving job ringed in the queue, muted queue words, the
+   policy names over each chart, the reason line, stride's thinner bars beside the lottery's, and a compact
+   workload table so its eight columns fit the setup column. */
+.it-cell.gjob.slstarve .cell-box { stroke: var(--bad); stroke-width: 3; stroke-dasharray: 5 3; }
+.it-text.slmuted .free-text { fill: var(--muted); font-style: italic; font-weight: 500; }
+.it-text.slpol .free-text { font-size: 15px; }
+.it-text.slrow .free-text { font-size: 13px; font-weight: 650; fill: var(--muted); }
+.it-text.slwhy .free-text { font-size: 13px; fill: var(--text); }
+.it-text.slan .free-text { font-size: 13px; }
+.it-text.slan.good .free-text { fill: var(--good); font-weight: 650; }
+.it-text.slan.bad .free-text { fill: var(--bad); font-weight: 650; }
+.it-cell.gseg.slstride .cell-box { opacity: 0.75; stroke-dasharray: 3 2; }
+.lab-page[data-lab="scheduler"] .lw-table input, .lab-page[data-lab="scheduler"] .lw-table select { min-width: 36px; padding: 5px 5px; font-size: 13.5px; }
+.lab-page[data-lab="scheduler"] .lw-table td { padding: 2px 2px; }
+.lab-page[data-lab="scheduler"] .lab-sec:not(:has(.lab-field:not([hidden]))) { display: none; }
+.lab-page[data-lab="scheduler"] .lw-table input { min-width: 28px; }
+.lab-page[data-lab="scheduler"] .lw-table td:first-child input { min-width: 30px; }
+.lab-page[data-lab="scheduler"] .lw-table th { padding: 3px 2px; }
+.lab-page[data-lab="scheduler"] .lw-table input[data-col="tickets"] { min-width: 38px; }
+.it-path.slmiss .free-path { stroke: var(--bad); stroke-width: 2.6; fill: none; stroke-linecap: round; }
