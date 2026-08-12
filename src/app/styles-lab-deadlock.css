@@ -1,0 +1,12 @@
+/* The Deadlock lab (src/app/lab-deadlock-*.js): the ghost of the banker's pretended state, a dashed frame round the
+   tables while they hold values that are not yet real, and the note that keeps what the pretence would have been. */
+.it-region.dlghost .region-box { fill: color-mix(in srgb, var(--s-ready) 5%, transparent); stroke: var(--s-ready); stroke-width: 1.6; stroke-dasharray: 7 5; }
+.it-region.dlghost .region-text { font: 600 13px var(--font); fill: var(--s-ready); }
+.it-text.ledger.dlghost-t .free-text { fill: var(--muted); font-style: italic; }
+.it-state.ragp.pickable, .it-cell.ragr.pickable { cursor: pointer; }
+.it-edge.pickable .edge-path { cursor: pointer; }
+.it-text.dlghost-l .free-text { font: 600 13px var(--font); fill: var(--s-ready); }
+/* the setup's headed sections whose every field is hidden in this mode */
+.lab-page[data-lab="deadlock"] .lab-sec:not(:has(.lab-presets)):not(:has(.lab-field:not([hidden]))) { display: none; }
+/* the seed draws only the conditions mode's schedule; the other modes hide its control */
+.lab-page.dl-noseed .lab-seed { display: none; }
