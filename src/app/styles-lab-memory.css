@@ -1,0 +1,17 @@
+/* The Memory lab (src/app/lab-memory-*.js): buddy blocks that have been split, the boundary tags of a malloc heap,
+   slabs on their full, partial and empty lists, and a value written on its own bar. */
+.it-cell.ml-split .cell-box { fill: none; stroke: var(--node-line); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.it-cell.ml-split.act .cell-box { stroke: var(--accent); stroke-width: 2.4; }
+.it-cell.ml-tag .cell-box { fill: color-mix(in srgb, var(--text) 55%, var(--node)); stroke: none; }
+.it-region.ml-slab .region-box { fill: var(--surface2); stroke: var(--node-line); stroke-width: 1.4; }
+.it-region.ml-slab.full .region-box { stroke: var(--bad); }
+.it-region.ml-slab.partial .region-box { stroke: var(--accent); }
+.it-region.ml-slab.empty .region-box { stroke: var(--good); stroke-dasharray: 5 3; }
+.it-region.ml-slab.act .region-box { stroke-width: 3; }
+.it-text.ml-full .free-text { fill: var(--bad); font-weight: 700; }
+.it-text.ml-partial .free-text { fill: var(--accent-deep); font-weight: 700; }
+.it-text.ml-empty .free-text { fill: var(--good); font-weight: 700; }
+.it-text.onbar .free-text { fill: var(--accent-text); }
+/* a setup section whose fields the chosen workbench hides shows no empty heading */
+#labView[data-lab="memory"] .lab-sec:not(:has(.lab-field:not([hidden]))),
+#labView[data-lab="vm"] .lab-sec:not(:has(.lab-field:not([hidden]))) { display: none; }
