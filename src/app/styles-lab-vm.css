@@ -1,0 +1,7 @@
+/* The Virtual memory lab (src/app/lab-vm-*.js): the working-set window over the reference string, and the strip of
+   faults and hits under the working-set plot. */
+.it-bracket.vl-ws .bracket-path { stroke: var(--accent); stroke-width: 1.8; fill: none; }
+.it-bracket.vl-ws .bracket-text { fill: var(--accent-deep); font-weight: 700; }
+.it-bitmap.vl-faults .bm-frame { fill: none; stroke: none; }
+.it-bitmap.vl-faults .bm.b1 { fill: color-mix(in srgb, var(--good) 70%, var(--node)); }
+.it-bitmap.vl-faults .bm.b2 { fill: var(--bad); }
