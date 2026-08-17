@@ -1,0 +1,10 @@
+/* The Storage lab (src/app/lab-storage-*.js): legend swatches for the SSD's active and victim blocks, the current
+   values in the RAID panel, the chunks read (violet), and a slightly tighter table in the setup column. */
+.it-cell.blk-sw .cell-box { fill: var(--surface); stroke: var(--node-line); stroke-width: 1.4; }
+.it-cell.blk-sw.active .cell-box { stroke: var(--p1); stroke-width: 2.4; }
+.it-cell.blk-sw.victim .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.4; }
+.it-text.mono.act .free-text { fill: var(--accent-deep); font-weight: 750; }
+.it-text.tick.muted .free-text { fill: var(--muted); opacity: 0.75; }
+.it-cell.dk.rd-data.act .cell-box, .it-cell.dk.rd-par.act .cell-box, .it-cell.dk.rd-new.act .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.dk.rd-data.src .cell-box, .it-cell.dk.rd-par.src .cell-box, .it-cell.dk.swatch.src .cell-box { stroke: var(--p2); stroke-width: 3; stroke-dasharray: none; }
+.lab-page[data-lab="storage"] .lw-table input { min-width: 0; }
