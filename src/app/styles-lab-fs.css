@@ -1,0 +1,28 @@
+/* The File-system lab (src/app/lab-fs-*.js): the kinds of data block on the map (directory, indirect or pointer
+   block, symlink), a block whose newer copy is still in memory (dashed), a block read (blue), the Inspect tab's bar,
+   and the segments and trees of the other workbenches. */
+.it-cell.dk.fl-dir .cell-box { fill: color-mix(in srgb, var(--p1) 48%, var(--node)); stroke: var(--p1); stroke-width: 1.8; }
+.it-cell.dk.fl-ind .cell-box { fill: color-mix(in srgb, var(--p1) 10%, var(--node)); stroke: var(--p1); stroke-width: 1.8; stroke-dasharray: 4 2.5; }
+.it-cell.dk.fl-link .cell-box { fill: color-mix(in srgb, var(--p4) 18%, var(--node)); stroke: var(--p4); }
+.it-cell.dk.fl-mem .cell-box { stroke: var(--p2); stroke-width: 2.4; stroke-dasharray: 5 3; }
+.it-cell.dk.fl-rd .cell-box { stroke: var(--p0); stroke-width: 3; }
+.it-cell.dk.act.fl-ind .cell-box, .it-cell.dk.act.fl-mem .cell-box { stroke-dasharray: none; }
+.it-cell.dk.seen.fl-ind .cell-box { stroke: var(--accent); }
+.it-cell.dk.fl-badge .cell-text { font-weight: 700; }
+.it-cell.pickable { cursor: pointer; }
+.fl-insp-bar { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+.fl-insp-bar select { align-self: flex-start; }
+.fl-insp-inos { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.fl-insp-inos .chip { font-family: var(--mono); font-size: 12.5px; }
+.fl-insp-l { font-size: 13px; color: var(--muted); margin-right: 2px; }
+/* copy-on-write and the log */
+.it-cell.dk.fl-old .cell-box { fill: color-mix(in srgb, var(--muted) 16%, var(--node)); stroke: var(--muted); stroke-width: 1.6; stroke-dasharray: 4 2.5; }
+.it-cell.dk.fl-bad .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.8; }
+.it-text.fl-note .free-text { fill: var(--muted); }
+/* the copy-on-write tree's boxes take their block's colour */
+.it-state.dk-sb .st-shape { fill: color-mix(in srgb, var(--p2) 22%, var(--node)); stroke: var(--p2); }
+.it-state.dk-ibm .st-shape { fill: color-mix(in srgb, var(--p3) 26%, var(--node)); stroke: var(--p3); }
+.it-state.dk-it .st-shape { fill: color-mix(in srgb, var(--p0) 20%, var(--node)); stroke: var(--p0); }
+.it-state.dk-data .st-shape { fill: color-mix(in srgb, var(--p1) 20%, var(--node)); stroke: var(--p1); }
+.it-state.dk-data.fl-dir .st-shape { fill: color-mix(in srgb, var(--p1) 44%, var(--node)); }
+.it-state.dk.act .st-shape { fill: color-mix(in srgb, var(--accent) 30%, var(--node)); stroke: var(--accent); stroke-width: 2.6; }
