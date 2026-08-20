@@ -1,0 +1,108 @@
+/* The VM lab (src/app/lab-vmm-*.js): the 2-D walk grid (a host read, a guest entry in its level's colour, the data,
+   a shadow read), host and shadow table pages, bars, instruction fates, I/O hops by layer, the process table seen
+   through namespaces, and control-group lanes. */
+.it.vx-host { --lv: var(--p4); --lv-text: color-mix(in srgb, var(--p4) 70%, var(--text)); }
+.it.vx-shadow { --lv: var(--p3); --lv-text: color-mix(in srgb, var(--p3) 70%, var(--text)); }
+.it-text.vx-lvtext .free-text { fill: var(--lv-text); }
+.it-text.vx-shtext .free-text { fill: color-mix(in srgb, var(--p3) 70%, var(--text)); }
+.it-text.vx-modetitle .free-text { font-size: 15px; }
+
+/* the walk grid */
+.it-cell.vx-w .cell-text { font: 700 14px var(--mono); fill: var(--text); }
+.it-cell.vx-w.empty .cell-box { fill: var(--surface2); stroke: var(--border); stroke-dasharray: 3 3; }
+.it-cell.vx-w.host .cell-box { fill: color-mix(in srgb, var(--p4) 22%, var(--node)); stroke: var(--p4); stroke-width: 1.6; }
+.it-cell.vx-w.guest .cell-box { fill: color-mix(in srgb, var(--lv) 28%, var(--node)); stroke: var(--lv); stroke-width: 1.8; }
+.it-cell.vx-w.data .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 2; }
+.it-cell.vx-w.shadow .cell-box { fill: color-mix(in srgb, var(--p3) 26%, var(--node)); stroke: var(--p3); stroke-width: 1.8; }
+.it-cell.vx-w.act .cell-box { stroke: var(--act); stroke-width: 3.2; }
+.it-cell.vx-addr .cell-box { fill: var(--surface); stroke: var(--border); }
+.it-cell.vx-addr .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.vx-addr.good .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 1.8; }
+
+/* bars */
+.it-cell.vx-track .cell-box { fill: var(--surface2); stroke: var(--border); stroke-width: 1; }
+.it-cell.vx-bar .cell-box { stroke: none; fill: color-mix(in srgb, var(--accent) 65%, var(--node)); }
+.it-cell.vx-bar.soft .cell-box { fill: color-mix(in srgb, var(--node-line) 50%, var(--node)); }
+.it-cell.vx-bar.vx-shbar .cell-box { fill: color-mix(in srgb, var(--p3) 70%, var(--node)); }
+.it-cell.vx-bar.vx-nbar .cell-box { fill: color-mix(in srgb, var(--p0) 65%, var(--node)); }
+.it-cell.vx-bar.vx-exitbar .cell-box { fill: color-mix(in srgb, var(--bad) 75%, var(--node)); }
+.it-cell.vx-bar.vx-costbar .cell-box { fill: color-mix(in srgb, var(--text) 45%, var(--node)); }
+.it-cell.vx-bar.vx-cycbar .cell-box { fill: color-mix(in srgb, var(--p1) 65%, var(--node)); }
+.it-cell.vx-bar.vx-wrongbar .cell-box { fill: color-mix(in srgb, var(--bad) 70%, var(--node)); }
+.it-cell.vx-bar.vx-copybar .cell-box { fill: color-mix(in srgb, var(--p2) 60%, var(--node)); }
+.it-cell.vx-bar.vx-membar .cell-box { fill: color-mix(in srgb, var(--p5) 60%, var(--node)); }
+.it-line.vx-limit .plain-line { stroke: var(--bad); stroke-width: 2.4; }
+.it-line.vx-period .plain-line { stroke: var(--node-line); stroke-width: 1.4; stroke-dasharray: 4 3; }
+
+/* shadow against nested: the guest's pages, the TLB, the shadow tables kept */
+.it-cell.vx-proc .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-width: 1.4; }
+.it-cell.vx-proc .cell-text { font: 700 14px var(--font); }
+.it-cell.vx-proc.act .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 2.4; }
+.it-cell.vx-page .cell-box { fill: var(--node); stroke: var(--node-line); stroke-width: 1.2; }
+.it-cell.vx-page .cell-text, .it-cell.vx-tlb .cell-text { font: 650 13px var(--mono); }
+.it-cell.vx-tlb .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 1.4; }
+.it-cell.vx-shadowtab .cell-box { fill: color-mix(in srgb, var(--p3) 20%, var(--node)); stroke: var(--p3); stroke-width: 1.6; }
+.it-cell.vx-shadowtab .cell-text { font: 700 14px var(--font); }
+
+/* the CPU */
+.it-cell.vx-ins .cell-box { fill: var(--node); stroke: var(--border); stroke-width: 1.2; }
+.it-cell.vx-ins .cell-text { font: 600 14px var(--mono); }
+.it-cell.vx-ins.sens .cell-box { stroke: var(--node-line); stroke-width: 1.8; fill: var(--surface2); }
+.it-cell.vx-ins.act .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 2.6; }
+.it-cell.vx-fate .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-width: 1.2; }
+.it-cell.vx-fate .cell-text { font: 650 13px var(--font); }
+.it-cell.vx-fate.good .cell-box { fill: var(--good-soft); stroke: var(--good); }
+.it-cell.vx-fate.good .cell-text { fill: var(--good); }
+.it-cell.vx-fate.act .cell-box { fill: var(--act-soft); stroke: var(--act); }
+.it-cell.vx-fate.act .cell-text { fill: var(--act-deep); }
+.it-cell.vx-fate.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2; }
+.it-cell.vx-fate.hot .cell-text { fill: var(--hot-deep); }
+.it-cell.vx-fate.cur .cell-box { stroke-width: 3; }
+.it-cell.vx-vcpu .cell-box { fill: color-mix(in srgb, var(--p2) 12%, var(--node)); stroke: var(--p2); stroke-width: 1.4; }
+.it-cell.vx-rcpu .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-width: 1.2; }
+.it-cell.vx-vcpu .cell-text, .it-cell.vx-rcpu .cell-text { font: 600 13px var(--mono); }
+
+/* I/O hops, by the layer they reach */
+.it-cell.vx-hop .cell-box { fill: var(--node); stroke: var(--wire); stroke-width: 1.4; }
+.it-cell.vx-hop .cell-text { font: 650 13px var(--font); fill: var(--text); }
+.it-cell.vx-hop .cell-text + .cell-text { font: 500 12px var(--font); fill: var(--muted); }
+.it-cell.vx-hop.guest .cell-box { fill: color-mix(in srgb, var(--p2) 10%, var(--node)); stroke: var(--p2); }
+.it-cell.vx-hop.host .cell-box { fill: color-mix(in srgb, var(--p4) 12%, var(--node)); stroke: var(--p4); }
+.it-cell.vx-hop.hw .cell-box { fill: var(--surface2); stroke: var(--node-line); }
+.it-cell.vx-hop.act .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 2.8; }
+.it-cell.vx-hop.act .cell-text + .cell-text { fill: var(--act-deep); }
+.it-cell.vx-hop.done .cell-box { stroke-width: 2; }
+
+/* namespaces */
+.it-cell.vx-ptab .cell-box { fill: var(--node); stroke: var(--border); stroke-width: 1; }
+.it-cell.vx-ptab .cell-text { font: 600 13px var(--mono); }
+.it-cell.vx-ptab.vx-ns0 .cell-box { fill: color-mix(in srgb, var(--p0) 14%, var(--node)); }
+.it-cell.vx-ptab.vx-ns1 .cell-box { fill: color-mix(in srgb, var(--p1) 16%, var(--node)); }
+.it-cell.vx-ptab.vx-ns2 .cell-box { fill: color-mix(in srgb, var(--p2) 16%, var(--node)); }
+.it-cell.vx-ptab.vx-ns3 .cell-box { fill: color-mix(in srgb, var(--p5) 16%, var(--node)); }
+.it-cell.vx-ptab.seen .cell-box { fill: var(--good-soft); stroke: var(--good); }
+.it-cell.vx-ptab.unseen .cell-box { fill: var(--surface2); }
+.it-cell.vx-ptab.unseen .cell-text { fill: var(--muted); font-weight: 500; }
+.it-cell.vx-ptab.me .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 2; }
+.it-cell.vx-ptab.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2; }
+.it-cell.vx-ps .cell-box { fill: var(--node); stroke: var(--border); stroke-width: 1; }
+.it-cell.vx-ps .cell-text { font: 600 13px var(--mono); white-space: pre; }
+.it-cell.vx-ps.me .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 1.8; }
+.it-cell.vx-nsv .cell-box { fill: color-mix(in srgb, var(--p1) 10%, var(--node)); stroke: var(--p1); stroke-width: 1.2; }
+.it-cell.vx-nsv .cell-text { font: 600 13px var(--mono); }
+.it-cell.vx-nsv.empty .cell-box { fill: var(--surface2); stroke: var(--border); stroke-dasharray: 3 3; }
+
+/* control groups */
+.it-cell.vx-cg .cell-box { stroke-width: 1; }
+.it-cell.vx-cg .cell-text { font: 700 12px var(--font); fill: var(--text); }
+.it-cell.vx-cg.cg0 .cell-box { fill: color-mix(in srgb, var(--p0) 55%, var(--node)); stroke: var(--p0); }
+.it-cell.vx-cg.cg1 .cell-box { fill: color-mix(in srgb, var(--p1) 55%, var(--node)); stroke: var(--p1); }
+.it-cell.vx-cg.cg2 .cell-box { fill: color-mix(in srgb, var(--p2) 55%, var(--node)); stroke: var(--p2); }
+.it-cell.vx-cg.cg3 .cell-box { fill: color-mix(in srgb, var(--p5) 55%, var(--node)); stroke: var(--p5); }
+.it-cell.vx-cg.thr .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); stroke-dasharray: 3 2; }
+.it-cell.vx-cg.idle .cell-box { fill: var(--surface); stroke: var(--node-line); stroke-dasharray: 3 2; }
+.it-cell.vx-cg.act .cell-box { stroke: var(--act); stroke-width: 2.4; }
+
+/* a setup section whose fields the chosen workbench hides shows no empty heading */
+#labView[data-lab="vmm"] .lab-sec:not(:has(.lab-field:not([hidden]))) { display: none; }
+.it-cell.vx-ins.small .cell-text { font-size: 12px; }
