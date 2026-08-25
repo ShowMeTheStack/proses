@@ -1,0 +1,57 @@
+/* Part 2's topics (src/topics/p02-*.js): stdout buffers, the address-space map, the PCB, the state diagram,
+   page tables and frames, status words. */
+.it-cell.bufline .cell-box { fill: var(--surface2); stroke: var(--border); stroke-dasharray: 4 3; }
+.it-cell.bufline .cell-text { font: 600 13px var(--mono); fill: var(--muted); }
+.it-cell.bufline.full .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-dasharray: none; }
+.it-cell.bufline.full .cell-text { fill: var(--hot-deep); }
+/* the address space */
+.it-cell.seg .cell-box { stroke-width: 1.5; }
+.it-cell.seg .cell-text { font: 700 13px var(--font); fill: var(--text); }
+.it-cell.seg.text .cell-box { fill: color-mix(in srgb, var(--p2) 16%, var(--node)); stroke: var(--p2); }
+.it-cell.seg.data .cell-box { fill: color-mix(in srgb, var(--p0) 16%, var(--node)); stroke: var(--p0); }
+.it-cell.seg.heap .cell-box { fill: color-mix(in srgb, var(--p1) 14%, var(--node)); stroke: var(--p1); }
+.it-cell.seg.stack .cell-box { fill: color-mix(in srgb, var(--p3) 16%, var(--node)); stroke: var(--p3); }
+.it-cell.seg.gap .cell-box { fill: none; stroke: var(--border); stroke-dasharray: 5 4; }
+.it-cell.seg.gap .cell-text { fill: var(--muted); font-weight: 500; }
+.it-cell.seg.null .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-dasharray: 3 3; }
+.it-cell.seg.null .cell-text { fill: var(--muted); font-weight: 600; }
+.it-cell.blk .cell-box { stroke-width: 1.4; }
+.it-cell.blk .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.blk.heap .cell-box { fill: color-mix(in srgb, var(--p1) 30%, var(--node)); stroke: var(--p1); }
+.it-cell.blk.free .cell-box { fill: var(--free); stroke: var(--border); stroke-dasharray: 4 3; }
+.it-cell.blk.free .cell-text { fill: var(--muted); }
+.it-cell.blk.frame .cell-box { fill: color-mix(in srgb, var(--p3) 30%, var(--node)); stroke: var(--p3); }
+.it-cell.blk.act .cell-box { stroke: var(--accent); stroke-width: 2.6; fill: var(--accent-soft); }
+.it-text.addr .free-text { font: 600 13px var(--mono); fill: var(--muted); }
+/* the PCB */
+.it-cell.pcbk .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.pcbk .cell-text { font: 650 13px var(--font); fill: var(--muted); }
+.it-cell.pcbv .cell-box { fill: var(--node); stroke: var(--border); }
+.it-cell.pcbv .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.pcbk.act .cell-box, .it-cell.pcbv.act .cell-box { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
+.it-cell.pcbk.act .cell-text { fill: var(--accent-deep); }
+.it-cell.pcbv.changed .cell-box { fill: var(--hot-soft); stroke: var(--hot); }
+/* pages and frames */
+.it-cell.pg .cell-box { fill: var(--node); stroke: var(--node-line); stroke-width: 1.2; }
+.it-cell.pg .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.pg.shared .cell-box { fill: color-mix(in srgb, var(--p2) 18%, var(--node)); stroke: var(--p2); }
+.it-cell.pg.own0 .cell-box { fill: color-mix(in srgb, var(--p0) 20%, var(--node)); stroke: var(--p0); }
+.it-cell.pg.own1 .cell-box { fill: color-mix(in srgb, var(--p1) 20%, var(--node)); stroke: var(--p1); }
+.it-cell.pg.act .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.pg.none .cell-box { fill: none; stroke: var(--border); stroke-dasharray: 3 3; }
+.it-line.map .plain-line { stroke: var(--node-line); stroke-width: 1.2; opacity: 0.7; }
+.it-line.map.act .plain-line { stroke: var(--accent); stroke-width: 2.2; opacity: 1; }
+/* status words */
+.it-cell.bitc .cell-box { fill: var(--node); stroke: var(--border); }
+.it-cell.bitc .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.bitc.hi .cell-box { fill: color-mix(in srgb, var(--p0) 18%, var(--node)); stroke: var(--p0); }
+.it-cell.bitc.lo .cell-box { fill: color-mix(in srgb, var(--p4) 16%, var(--node)); stroke: var(--p4); }
+.it-cell.bitc.core .cell-box { fill: var(--surface2); stroke: var(--node-line); }
+.it-cell.macro .cell-box { fill: var(--node); stroke: var(--border); }
+.it-cell.macro .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.macro.yes .cell-box { fill: var(--good-soft); stroke: var(--good); }
+.it-cell.macro.no .cell-text { fill: var(--muted); }
+/* outcomes */
+.it-cell.outc .cell-box { fill: var(--node); stroke: var(--border); }
+.it-cell.outc .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.outc.act .cell-box { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2.2; }
