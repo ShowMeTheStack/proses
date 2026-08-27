@@ -1,0 +1,72 @@
+/* Part 3's topics (src/topics/p03-*.js) and the descriptor kit (src/stage/kit-p03-fd.js): descriptor cells and
+   open-file entries coloured by what they name, pipe bytes, signal state cells, message queues, mailboxes,
+   sockets and RPC bytes. */
+.it-cell.fdproc .cell-text { font: 650 13px var(--font); }
+.it-cell.fdcell .cell-box { fill: var(--node); stroke: var(--node-line); stroke-width: 1.3; }
+.it-cell.fdcell .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.fdcell.closed .cell-box { fill: none; stroke: var(--border); stroke-dasharray: 4 3; }
+.it-cell.fdcell.closed .cell-text { fill: var(--muted); }
+.it-cell.fdcell.of-tty .cell-box { fill: var(--surface2); }
+.it-cell.fdcell.of-pr .cell-box { fill: color-mix(in srgb, var(--p0) 16%, var(--node)); stroke: var(--p0); }
+.it-cell.fdcell.of-pw .cell-box { fill: color-mix(in srgb, var(--p4) 16%, var(--node)); stroke: var(--p4); }
+.it-cell.fdcell.of-file .cell-box { fill: color-mix(in srgb, var(--p1) 16%, var(--node)); stroke: var(--p1); }
+.it-cell.fdcell.of-sink .cell-box { fill: color-mix(in srgb, var(--p5) 16%, var(--node)); stroke: var(--p5); }
+.it-cell.fdcell.act .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.oftext .cell-box { fill: var(--node); stroke: var(--border); }
+.it-cell.oftext .cell-text { font: 500 13px var(--font); fill: var(--text); }
+.it-cell.oftext.mono .cell-text { font-family: var(--mono); font-weight: 600; }
+.it-cell.oftext.act .cell-box { stroke: var(--accent); stroke-width: 2; fill: var(--accent-soft); }
+.it-cell.oftext.hot .cell-box { stroke: var(--hot); stroke-width: 2; fill: var(--hot-soft); }
+.it-cell.pipename .cell-box { fill: var(--surface2); stroke: var(--node-line); }
+.it-cell.pipename .cell-text { font: 700 13px var(--font); fill: var(--text); }
+.it-cell.pipename.act .cell-box { stroke: var(--accent); stroke-width: 2.2; fill: var(--accent-soft); }
+.it-cell.pipetrack .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-dasharray: 4 3; }
+.it-cell.pipebyte .cell-box { fill: color-mix(in srgb, var(--p0) 22%, var(--node)); stroke: var(--p0); stroke-width: 1; }
+.it-cell.pipebyte .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.pipebyte.more .cell-box { fill: var(--surface2); stroke: var(--node-line); }
+.it-text.muted .free-text { fill: var(--muted); font-weight: 500; }
+.it-cell.ptag.you .cell-box { fill: var(--surface2); stroke: var(--text); stroke-dasharray: 3 2; }
+/* signals */
+.it-cell.sigcell .cell-box { fill: var(--node); stroke: var(--border); }
+.it-cell.sigcell .cell-text { font: 600 13px var(--font); fill: var(--text); }
+.it-cell.sigcell .cell-text:first-child { fill: var(--muted); font-weight: 700; }
+.it-cell.sigcell.sigp.on .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2; }
+.it-cell.sigcell.sigm.on .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); stroke-width: 2; }
+/* message passing, mailboxes, shared memory */
+.it-cell.msg .cell-box { fill: color-mix(in srgb, var(--p2) 18%, var(--node)); stroke: var(--p2); stroke-width: 1.4; }
+.it-cell.msg .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.msg.act .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.slot .cell-box { fill: var(--node); stroke: var(--node-line); stroke-width: 1.3; }
+.it-cell.slot .cell-text { font: 600 14px var(--mono); fill: var(--text); }
+.it-cell.slot.full .cell-box { fill: color-mix(in srgb, var(--p1) 20%, var(--node)); stroke: var(--p1); }
+.it-cell.slot.act .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.qbox .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-dasharray: 5 3; }
+.it-cell.qbox .cell-text { font: 600 13px var(--font); fill: var(--muted); }
+.it-cell.kern .cell-box { fill: color-mix(in srgb, var(--accent) 7%, var(--node)); stroke: color-mix(in srgb, var(--accent) 55%, var(--node-line)); }
+.it-cell.kern .cell-text { font: 650 13px var(--font); fill: var(--accent-deep); }
+/* sockets, packets and bytes */
+.it-line.lifeline .plain-line { stroke: var(--node-line); stroke-width: 1.4; stroke-dasharray: 4 4; }
+.it-edge.pkt .edge-path { stroke: var(--p0); stroke-width: 1.8; }
+.it-edge.pkt .edge-label { font: 600 13px var(--mono); fill: var(--text); }
+.it-edge.pkt.reply .edge-path { stroke: var(--p1); }
+.it-edge.pkt.lost .edge-path { stroke: var(--bad); stroke-dasharray: 5 4; }
+.it-edge.pkt.dup .edge-path { stroke: var(--hot); }
+.it-edge.pkt.act .edge-path { stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.byte .cell-box { fill: var(--node); stroke: var(--node-line); stroke-width: 1.1; }
+.it-cell.byte .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.byte.f0 .cell-box { fill: color-mix(in srgb, var(--p0) 18%, var(--node)); stroke: var(--p0); }
+.it-cell.byte.f1 .cell-box { fill: color-mix(in srgb, var(--p1) 18%, var(--node)); stroke: var(--p1); }
+.it-cell.byte.f2 .cell-box { fill: color-mix(in srgb, var(--p2) 18%, var(--node)); stroke: var(--p2); }
+.it-cell.byte.f3 .cell-box { fill: color-mix(in srgb, var(--p3) 18%, var(--node)); stroke: var(--p3); }
+.it-cell.byte.hdr .cell-box { fill: var(--surface2); stroke: var(--node-line); }
+.it-cell.byte.act .cell-box { stroke: var(--accent); stroke-width: 2.4; }
+.it-cell.pipename.file .cell-box { fill: color-mix(in srgb, var(--p1) 16%, var(--node)); stroke: var(--p1); }
+/* a process's list of operations */
+.it-cell.opcell .cell-box { fill: var(--node); stroke: var(--border); }
+.it-cell.opcell .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.opcell.opdone .cell-box { fill: var(--surface2); }
+.it-cell.opcell.opdone .cell-text { fill: var(--muted); font-weight: 500; }
+.it-cell.opcell.opnext .cell-box { stroke: var(--s-ready); stroke-width: 1.8; }
+.it-cell.opcell.opnow .cell-box { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2.4; }
+.it-cell.opcell.opblk .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); stroke-width: 2.2; }
+.it-cell.fdproc.s-done .cell-box { fill: var(--s-done-soft); stroke: var(--s-done); }
