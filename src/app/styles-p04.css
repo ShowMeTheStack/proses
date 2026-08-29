@@ -1,0 +1,34 @@
+/* Part 4, threads (src/topics/p04-*.js): address spaces with a band per region, a thread's stack coloured by the
+   thread, shared objects against private copies, and the threading-model Gantt rows. */
+.it-cell.thstk .cell-text { font: 600 13px var(--mono); }
+.it-cell.thstk.p0 .cell-box { fill: color-mix(in srgb, var(--p0) 18%, var(--node)); stroke: var(--p0); stroke-width: 1.6; }
+.it-cell.thstk.p1 .cell-box { fill: color-mix(in srgb, var(--p1) 18%, var(--node)); stroke: var(--p1); stroke-width: 1.6; }
+.it-cell.thstk.p2 .cell-box { fill: color-mix(in srgb, var(--p2) 18%, var(--node)); stroke: var(--p2); stroke-width: 1.6; }
+.it-cell.thstk.p3 .cell-box { fill: color-mix(in srgb, var(--p3) 18%, var(--node)); stroke: var(--p3); stroke-width: 1.6; }
+.it-cell.thstk.p4 .cell-box { fill: color-mix(in srgb, var(--p4) 18%, var(--node)); stroke: var(--p4); stroke-width: 1.6; }
+.it-cell.thstk.act .cell-box { stroke: var(--accent); stroke-width: 3; }
+.it-cell.thstk.gone .cell-box { fill: var(--surface2); stroke: var(--border); stroke-dasharray: 4 3; }
+.it-cell.thstk.gone .cell-text { fill: var(--muted); }
+.it-cell.varval.qn .cell-text { fill: var(--muted); font-weight: 500; font-style: italic; }
+.it-cell.varval.shared .cell-box, .it-cell.swatch.shared .cell-box { fill: color-mix(in srgb, var(--used) 40%, var(--node)); stroke: var(--used); stroke-width: 2; }
+.it-cell.varval.heapown .cell-box { fill: color-mix(in srgb, var(--used) 18%, var(--node)); stroke: var(--used); stroke-dasharray: 4 3; }
+.it-cell.varval.own.p0 .cell-box { fill: color-mix(in srgb, var(--p0) 20%, var(--node)); stroke: var(--p0); }
+.it-cell.varval.own.p1 .cell-box { fill: color-mix(in srgb, var(--p1) 20%, var(--node)); stroke: var(--p1); }
+.it-cell.varval.own.p2 .cell-box { fill: color-mix(in srgb, var(--p2) 20%, var(--node)); stroke: var(--p2); }
+.it-cell.varval.own.p3 .cell-box { fill: color-mix(in srgb, var(--p3) 20%, var(--node)); stroke: var(--p3); }
+.it-cell.swatch.own .cell-box { fill: color-mix(in srgb, var(--p1) 20%, var(--node)); stroke: var(--p1); stroke-width: 2; }
+.it-cell.varval.empty .cell-box { fill: var(--surface2); stroke: var(--border); stroke-dasharray: 3 3; }
+.it-cell.varval.ok .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 2; }
+.it-cell.varval.bad .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2; }
+.it-cell.gseg.io .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); stroke-dasharray: 4 3; }
+.it-cell.gseg.idle .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.gseg.idle .cell-text { fill: var(--muted); font-weight: 500; }
+.it-cell.kt .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-width: 1.6; }
+.it-cell.kt .cell-text { font: 700 13px var(--mono); }
+.it-edge.bind .edge-path { stroke: var(--node-line); stroke-width: 1.6; }
+.it-edge.bind.hot .edge-path { stroke: var(--hot); stroke-width: 2.4; }
+.it-cell.swatch.io .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); stroke-dasharray: 4 3; }
+.it-cell.gseg.wait .cell-box, .it-cell.swatch.wait .cell-box { fill: var(--s-ready-soft); stroke: var(--s-ready); stroke-width: 1; opacity: 0.8; }
+.it-cell.kt.s-blocked .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); stroke-width: 2; }
+.it-cell.kt.s-running .cell-box { fill: var(--s-running-soft); stroke: var(--s-running); stroke-width: 2; }
+.it-cell.mxown.held.ghost .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-dasharray: 5 3; stroke-width: 2; }
