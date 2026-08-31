@@ -1,0 +1,65 @@
+/* Part 5 and 6 topics (src/topics/p05-*.js, p06-*.js): job lanes, context-switch slivers, ticket strips, the fair
+   scheduler's red-black tree, real-time releases and deadlines, and mutex holders. */
+.it-cell.p05lane .cell-box { stroke-width: 1.2; }
+.it-cell.p05lane .cell-text { font: 600 13px var(--font); fill: var(--muted); }
+.it-cell.p05wait .cell-box { fill: var(--hot-soft); stroke: color-mix(in srgb, var(--hot) 55%, transparent); }
+.it-cell.p05wait .cell-text { fill: var(--hot-deep); }
+.it-cell.p05io .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); stroke-dasharray: 4 3; }
+.it-cell.p05io .cell-text { fill: var(--s-blocked); }
+.it-cell.p05cs .cell-box, .it-cell.p05warm .cell-box { fill: var(--surface3); stroke: var(--node-line); stroke-dasharray: 2 2; }
+.it-cell.p05warm .cell-box { fill: color-mix(in srgb, var(--cls2) 22%, var(--node)); stroke: var(--cls2); }
+.it-cell.gjob.p05sw.p05sw .cell-box { stroke-dasharray: 4 3; }
+.it-bracket.p05br .bracket-path { stroke: var(--text); stroke-width: 1.6; fill: none; }
+.it-bracket.p05br .bracket-text { fill: var(--text); font-weight: 700; }
+.it-text.p05val .free-text { font: 700 14px var(--mono); fill: var(--text); }
+.it-text.p05val.act .free-text { fill: var(--act-deep); }
+.it-text.hot .free-text { fill: var(--hot-deep); font-weight: 700; }
+.it-cell.gseg.p05next.p05next .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.p05qon .cell-box { fill: var(--accent); stroke: var(--accent-deep); }
+.it-cell.p05qoff .cell-box { fill: var(--surface2); stroke: var(--node-line); }
+.it-edge.p05back .edge-path { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 6 4; }
+.it-edge.p05back .edge-label { font: 600 13px var(--font); fill: var(--act-deep); }
+.it-wire.p05back .wire-path { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 6 4; }
+.it-text.p05backt .free-text { font: 600 13px var(--font); fill: var(--act-deep); }
+.it-cell.glane.p05spent .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-dasharray: 4 3; }
+.it-path.p05want .free-path { stroke: var(--text); stroke-width: 2.4; }
+.it-path.p05pin .free-path { stroke: var(--node-line); stroke-width: 1.4; stroke-dasharray: 3 3; }
+/* the fair scheduler's red-black tree */
+:root { --rb-black: #1d1d1f; --rb-black-line: #1d1d1f; }
+:root[data-theme="dark"] { --rb-black: #0b0b0c; --rb-black-line: #d9d9de; }
+.it-state.tnode.p05rb0 .st-shape { fill: color-mix(in srgb, var(--p0) 30%, var(--node)); }
+.it-state.tnode.p05rb1 .st-shape { fill: color-mix(in srgb, var(--p1) 30%, var(--node)); }
+.it-state.tnode.p05rb2 .st-shape { fill: color-mix(in srgb, var(--p2) 30%, var(--node)); }
+.it-state.tnode.p05rb3 .st-shape { fill: color-mix(in srgb, var(--p3) 30%, var(--node)); }
+.it-state.tnode.p05rb4 .st-shape { fill: color-mix(in srgb, var(--p4) 30%, var(--node)); }
+.it-state.tnode.p05rb5 .st-shape { fill: color-mix(in srgb, var(--p5) 30%, var(--node)); }
+.it-state.tnode.p05black .st-shape { stroke: var(--rb-black-line); stroke-width: 3; }
+.it-state.tnode.p05red .st-shape { stroke: var(--bad); stroke-width: 3; }
+.it-state.tnode .st-text { fill: var(--node-text); }
+.it-cell.p05mR .cell-box { fill: var(--bad); stroke: var(--bad); }
+.it-cell.p05mB .cell-box { fill: var(--rb-black); stroke: var(--rb-black-line); stroke-width: 1.4; }
+.it-cell.p05mR .cell-text, .it-cell.p05mB .cell-text { font: 800 13px var(--font); fill: #fff; }
+.it-cell.p05mNew .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+.it-state.tnode.p05nil .st-shape { fill: none; stroke: var(--node-line); stroke-dasharray: 3 3; stroke-width: 1.2; }
+.it-state.tnode.p05nil .st-text { font: 500 12px var(--font); fill: var(--muted); }
+.it-state.tnode.act.p05black .st-shape, .it-state.tnode.act.p05red .st-shape { stroke: var(--accent); stroke-width: 3.2; }
+/* part 6: cores */
+.it-cell.p06c0 .cell-box { fill: color-mix(in srgb, var(--cls0) 35%, var(--node)); stroke: var(--cls0); }
+.it-cell.p06c1 .cell-box { fill: color-mix(in srgb, var(--cls1) 35%, var(--node)); stroke: var(--cls1); }
+.it-cell.p06c2 .cell-box { fill: color-mix(in srgb, var(--cls2) 35%, var(--node)); stroke: var(--cls2); }
+.it-cell.p06c3 .cell-box { fill: color-mix(in srgb, var(--cls3) 35%, var(--node)); stroke: var(--cls3); }
+.it-cell.p06c0 .cell-text, .it-cell.p06c1 .cell-text, .it-cell.p06c2 .cell-text, .it-cell.p06c3 .cell-text { font: 700 13px var(--font); fill: var(--node-text); }
+.it-cell.p06warm .cell-box { stroke-dasharray: 3 2; fill-opacity: 0.45; }
+/* part 6: real-time releases (arrows up) and deadlines (marks down) */
+.it-path.p06rel .free-path { stroke: var(--text); stroke-width: 1.6; fill: none; }
+.it-path.p06dl .free-path { fill: var(--hot); stroke: var(--hot); stroke-width: 1; }
+.it-dot.mark.p06ok .dot-shape { fill: var(--good); }
+.it-dot.mark.p06mid .dot-shape { fill: var(--hot); }
+.it-dot.mark.p06bad .dot-shape { fill: var(--bad); }
+.it-path.p06dline .free-path { stroke: var(--hot); stroke-width: 2; stroke-dasharray: 6 3; fill: none; }
+/* part 6: mutexes and priority inversion */
+.it-cell.p06blk .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); stroke-width: 1.4; }
+.it-cell.p06blk .cell-text { font: 600 13px var(--font); fill: var(--s-blocked); }
+.it-cell.gseg.p06hold.p06hold .cell-box { stroke: var(--text); stroke-width: 2.4; stroke-dasharray: 5 3; }
+.it-cell.gseg.p06boost.p06boost .cell-box { stroke: var(--accent); stroke-width: 3; }
+.it-cell.p06mutex .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-width: 1.4; }
