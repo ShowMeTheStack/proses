@@ -1,0 +1,72 @@
+/* Parts 7 and 8, synchronisation (src/stage/kit-p07-sync.js and the topics p07-*, p08-*): thread cards coloured
+   by state, locks with their owners and queues, shared variables, schedules as strips coloured by thread, the
+   model checker's verdict, and registers. The current step is the accent; a failure is pink (hot). */
+.it-cell.thcard .cell-text { font: 700 15px var(--font); }
+.it-cell.thcard.incs .cell-box { stroke-width: 3.4; }
+.it-text.thsub .free-text { font: 600 13px var(--mono); fill: var(--muted); }
+.it-text.thsub.hot .free-text { fill: var(--hot-deep); }
+.it-text.thsub.good .free-text { fill: var(--good); }
+.it-cell.mxown .cell-text { font: 700 15px var(--font); }
+.it-cell.mxown.free .cell-box { fill: var(--free); stroke: var(--node-line); stroke-dasharray: 4 3; }
+.it-cell.mxown.free .cell-text { fill: var(--muted); font-weight: 600; font-size: 13px; }
+.it-cell.mxown.held .cell-box { fill: var(--s-running-soft); stroke: var(--s-running); stroke-width: 2; }
+.it-cell.mxown.act .cell-box { stroke: var(--accent); stroke-width: 3; }
+.it-cell.varname .cell-box { fill: transparent; stroke: transparent; }
+.it-cell.varname .cell-text { font: 600 14px var(--mono); fill: var(--text); }
+.it-cell.varval .cell-box { fill: var(--node); stroke: var(--node-line); stroke-width: 1.4; }
+.it-cell.varval .cell-text { font: 700 15px var(--mono); }
+.it-cell.varval.act .cell-box { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2.4; }
+.it-cell.varval.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.4; }
+.it-cell.stepcell .cell-text { font: 700 13px var(--font); }
+.it-cell.stepcell.future { opacity: 0.32; }
+.it-cell.stepcell.act .cell-box { stroke: var(--accent); stroke-width: 3; }
+.it-cell.stepcell.hot .cell-box { stroke: var(--hot); stroke-width: 3; }
+.it-cell.stepcell.flush .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-dasharray: 3 2; }
+.it-region.verdictbox .region-box { fill: var(--surface); stroke: var(--border); stroke-width: 1.6; }
+.it-region.verdictbox.ok .region-box { fill: color-mix(in srgb, var(--good) 8%, var(--surface)); stroke: var(--good); }
+.it-region.verdictbox.bad .region-box { fill: color-mix(in srgb, var(--hot) 8%, var(--surface)); stroke: var(--hot); }
+.it-region.verdictbox.warn .region-box { fill: color-mix(in srgb, var(--s-ready) 10%, var(--surface)); stroke: var(--s-ready); }
+.it-text.vhead .free-text { font: 700 16px var(--font); fill: var(--text); }
+.it-text.vhead.ok .free-text { fill: var(--good); }
+.it-text.vhead.bad .free-text { fill: var(--hot-deep); }
+.it-text.vhead.warn .free-text { fill: var(--s-ready); }
+.it-text.vline .free-text { font: 500 14px var(--font); fill: var(--text); }
+.it-cell.regcell .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.regcell .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.regcell.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2; }
+.it-text.p0 .free-text { fill: var(--p0); font-weight: 700; } .it-text.p1 .free-text { fill: var(--p1); font-weight: 700; }
+.it-text.p2 .free-text { fill: var(--p2); font-weight: 700; } .it-text.p3 .free-text { fill: var(--p3); font-weight: 700; }
+.it-text.p4 .free-text { fill: var(--p4); font-weight: 700; } .it-text.p5 .free-text { fill: var(--p5); font-weight: 700; }
+.it-state.p0 .st-shape { fill: color-mix(in srgb, var(--p0) 22%, var(--node)); stroke: var(--p0); stroke-width: 2; }
+.it-state.p1 .st-shape { fill: color-mix(in srgb, var(--p1) 22%, var(--node)); stroke: var(--p1); stroke-width: 2; }
+.it-state.p2 .st-shape { fill: color-mix(in srgb, var(--p2) 22%, var(--node)); stroke: var(--p2); stroke-width: 2; }
+.it-state.p3 .st-shape { fill: color-mix(in srgb, var(--p3) 22%, var(--node)); stroke: var(--p3); stroke-width: 2; }
+.it-edge.p0 .edge-path { stroke: var(--p0); stroke-width: 2.4; } .it-edge.p1 .edge-path { stroke: var(--p1); stroke-width: 2.4; }
+.it-edge.p2 .edge-path { stroke: var(--p2); stroke-width: 2.4; } .it-edge.p3 .edge-path { stroke: var(--p3); stroke-width: 2.4; }
+.it-edge.faint .edge-path { stroke: var(--border); stroke-width: 1.4; }
+.it-state.tnode.final .st-shape { stroke-width: 2.6; }
+.it-state.tnode.bad .st-shape { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.6; }
+.it-state.tnode.ok .st-shape { fill: var(--good-soft); stroke: var(--good); stroke-width: 2.6; }
+.it-state.tnode.path .st-shape { stroke: var(--accent); stroke-width: 3; }
+.it-edge.path .edge-path { stroke: var(--accent); stroke-width: 3; }
+.it-cell.sbuf .cell-box { fill: color-mix(in srgb, var(--s-ready) 12%, var(--node)); stroke: var(--s-ready); stroke-dasharray: 4 3; stroke-width: 1.8; }
+.it-cell.sbuf .cell-text { font: 600 13px var(--mono); }
+.it-region.memband .region-box { fill: color-mix(in srgb, var(--used) 22%, var(--surface)); stroke: var(--border); }
+.it-region.stackband .region-box { fill: var(--surface); stroke: var(--border); }
+.it-cell.swatch.ok .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 2; }
+.it-cell.swatch.bad .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2; }
+.it-cell.swatch.p0 .cell-box, .it-cell.swatch.p1 .cell-box, .it-cell.swatch.p2 .cell-box, .it-cell.swatch.p3 .cell-box { stroke-width: 2; }
+.it-line.legline.p0 .plain-line { stroke: var(--p0); stroke-dasharray: none; stroke-width: 2.6; }
+.it-line.legline.p1 .plain-line { stroke: var(--p1); stroke-dasharray: none; stroke-width: 2.6; }
+.it-line.legline.p2 .plain-line { stroke: var(--p2); stroke-dasharray: none; stroke-width: 2.6; }
+.it-line.legline.p3 .plain-line { stroke: var(--p3); stroke-dasharray: none; stroke-width: 2.6; }
+.it-line.legline.path .plain-line { stroke: var(--accent); stroke-dasharray: none; stroke-width: 3; }
+.it-cell.stepcell.ok .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 2; }
+.it-cell.stepcell.bad .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2; }
+.it-cell.stepcell.ok .cell-text { fill: var(--good); } .it-cell.stepcell.bad .cell-text { fill: var(--hot-deep); }
+.it-dot.mark.c1 .dot-shape, .it-dot.mark.c1 circle { fill: var(--cls1); } .it-dot.mark.c2 .dot-shape, .it-dot.mark.c2 circle { fill: var(--cls2); }
+.it-cell.thcard.p0 .cell-box { fill: color-mix(in srgb, var(--p0) 22%, var(--node)); stroke: var(--p0); stroke-width: 2.4; }
+.it-cell.thcard.p1 .cell-box { fill: color-mix(in srgb, var(--p1) 22%, var(--node)); stroke: var(--p1); stroke-width: 2.4; }
+.it-text.p7note .free-text { font: 500 13px var(--font); fill: var(--muted); }
+.it-text.roomlabel .free-text { font: 700 13px var(--font); fill: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.it-cell.ptag.big13 .cell-text { font-size: 13px; }
