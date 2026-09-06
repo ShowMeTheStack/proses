@@ -1,0 +1,53 @@
+/* Part 9 (deadlocks), and the pictures parts 17 and 18 share: resource-allocation graphs (src/stage/kit-p09-rag.js),
+   the wait-for graph, lock tags and verdict lines. Colour: a process's state on its circle (s-*); a request edge is
+   dashed amber (waiting), an assignment edge solid; a claim edge is dotted grey; an edge on a cycle is pink (hot);
+   the step's own edge is the accent. */
+.it-state.ragp .st-text { font-weight: 700; font-size: 15px; }
+.it-cell.ragr .cell-box { fill: var(--surface2); stroke: var(--wire); stroke-width: 1.8; }
+.it-cell.ragr.act .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 2.4; }
+.it-cell.ragr.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.2; }
+.it-text.ragname .free-text { font: 700 14px var(--font); fill: var(--text); }
+.it-dot.ragu .dot-shape { fill: var(--st-bg); stroke: var(--wire); stroke-width: 1.6; }
+.it-dot.ragu.held .dot-shape { fill: var(--wire); }
+.it-edge.raga .edge-path { stroke: var(--wire); stroke-width: 2.2; }
+.it-edge.ragw .edge-path { stroke: var(--s-blocked); stroke-width: 2.2; stroke-dasharray: 7 4; }
+.it-edge.ragc .edge-path { stroke: var(--node-line); stroke-width: 1.6; stroke-dasharray: 2 5; }
+.it-edge.ragwf .edge-path { stroke: var(--wire); stroke-width: 2; }
+.it-edge.ragwf .edge-label, .it-edge.ragw .edge-label { font: 600 14px var(--mono); fill: var(--muted); }
+.it-edge.raga.hot .edge-path, .it-edge.ragw.hot .edge-path, .it-edge.ragwf.hot .edge-path { stroke: var(--hot); stroke-width: 3; stroke-dasharray: none; }
+.it-edge.raga.act .edge-path, .it-edge.ragw.act .edge-path, .it-edge.ragc.act .edge-path { stroke: var(--act); stroke-width: 2.8; }
+.it-line.raglg .plain-line { stroke-width: 2.2; }
+.it-line.raglg.raga .plain-line { stroke: var(--wire); }
+.it-line.raglg.ragw .plain-line { stroke: var(--s-blocked); stroke-dasharray: 7 4; }
+.it-line.raglg.ragc .plain-line { stroke: var(--node-line); stroke-width: 1.6; stroke-dasharray: 2 5; }
+.it-line.raglg.hot .plain-line { stroke: var(--hot); stroke-width: 3; }
+/* step lists and verdicts beside a picture */
+.it-text.stepline .free-text { font: 500 14px var(--font); fill: var(--text); }
+.it-text.stepline.act .free-text { fill: var(--act); font-weight: 700; }
+.it-text.stepline.done .free-text { fill: var(--muted); }
+.it-text.verdict2 .free-text { font: 700 16px var(--font); fill: var(--text); }
+.it-text.verdict2.good .free-text { fill: var(--good); }
+.it-text.verdict2.hot .free-text { fill: var(--hot-deep); }
+.it-cell.lockbox .cell-box { fill: var(--surface2); stroke: var(--wire); stroke-width: 1.8; }
+.it-cell.lockbox .cell-text { font: 700 15px var(--mono); }
+.it-cell.lockbox.held .cell-box { fill: color-mix(in srgb, var(--s-running) 16%, var(--node)); stroke: var(--s-running); }
+.it-cell.lockbox.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.4; }
+.it-cell.tag .cell-text { font: 700 13px var(--font); }
+/* script cells: the ops a process runs, with its place marked */
+.it-cell.op .cell-box { fill: var(--node); stroke: var(--node-line); stroke-width: 1.2; }
+.it-cell.op .cell-text { font: 600 13px var(--mono); }
+.it-cell.op.done .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.op.done .cell-text { fill: var(--muted); font-weight: 500; }
+.it-cell.op.next .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 2.2; }
+.it-cell.op.next .cell-text { fill: var(--act-deep); }
+.it-cell.op.wait .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); stroke-width: 2.2; }
+.it-cell.tag .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-width: 1.4; }
+.it-cell.tag.act .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 2.2; }
+.it-cell.tag.act .cell-text { fill: var(--act-deep); }
+.it-cell.tag.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.2; }
+.it-cell.tag.hot .cell-text { fill: var(--hot-deep); }
+.it-cell.tag.done .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.tag.done .cell-text { fill: var(--muted); }
+.it-cell.tag.good .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 1.8; }
+.it-cell.tag.good .cell-text { fill: var(--good); }
+.it-dot.nobox .dot-shape { fill: none; stroke: none; }
