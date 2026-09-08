@@ -1,0 +1,54 @@
+/* Parts 10 and 11 (main and virtual memory): memory maps drawn to scale, the MMU's boxes, and the small marks the
+   topics share. Runs of memory: the kernel (os), a process (p0..p5), a hole (free), the run being acted on (act),
+   the one singled out (hot). */
+.it-region.p10-frame .region-box { fill: none; stroke: var(--node-line); stroke-width: 1.4; }
+.it-cell.p10-run .cell-box { fill: var(--node); stroke: var(--node-line); stroke-width: 1; }
+.it-cell.p10-run .cell-text { font: 700 13px var(--font); fill: var(--text); }
+.it-cell.p10-run .cell-text + .cell-text { font: 600 12px var(--mono); fill: var(--muted); }
+.it-cell.p10-run.os .cell-box { fill: color-mix(in srgb, var(--muted) 30%, var(--node)); }
+.it-cell.p10-run.free .cell-box { fill: var(--free); stroke: var(--border); }
+.it-cell.p10-run.free .cell-text { fill: var(--muted); font-weight: 600; }
+.it-cell.p10-run.p0 .cell-box { fill: color-mix(in srgb, var(--p0) 26%, var(--node)); stroke: var(--p0); }
+.it-cell.p10-run.p1 .cell-box { fill: color-mix(in srgb, var(--p1) 26%, var(--node)); stroke: var(--p1); }
+.it-cell.p10-run.p2 .cell-box { fill: color-mix(in srgb, var(--p2) 26%, var(--node)); stroke: var(--p2); }
+.it-cell.p10-run.p3 .cell-box { fill: color-mix(in srgb, var(--p3) 26%, var(--node)); stroke: var(--p3); }
+.it-cell.p10-run.p4 .cell-box { fill: color-mix(in srgb, var(--p4) 26%, var(--node)); stroke: var(--p4); }
+.it-cell.p10-run.p5 .cell-box { fill: color-mix(in srgb, var(--p5) 26%, var(--node)); stroke: var(--p5); }
+.it-cell.p10-run.waste .cell-box { fill: color-mix(in srgb, var(--bad) 30%, var(--node)); stroke: var(--bad); }
+.it-cell.p10-run.act .cell-box { stroke: var(--accent); stroke-width: 3; }
+.it-cell.p10-run.hot .cell-box { stroke: var(--hot); stroke-width: 3; }
+.it-cell.p10-run.cand .cell-box { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 5 3; }
+.it-cell.p10-run.dimrun { opacity: 0.45; }
+.it-line.p10-tick .plain-line { stroke: var(--node-line); stroke-width: 1.2; }
+.it-line.p10-mark .plain-line { stroke: var(--accent); stroke-width: 3; }
+.it-line.p10-mark.bad .plain-line { stroke: var(--bad); }
+
+/* boxes of the machine: the CPU, registers, a trap */
+.it-cell.p10-box .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-width: 1.6; }
+.it-cell.p10-box .cell-text { font: 700 14px var(--font); fill: var(--text); }
+.it-cell.p10-box .cell-text + .cell-text { font: 600 14px var(--mono); fill: var(--text); }
+.it-cell.p10-box.act .cell-box { stroke: var(--accent); stroke-width: 2.8; fill: var(--accent-soft); }
+.it-cell.p10-box.good .cell-box { stroke: var(--good); stroke-width: 2.6; fill: var(--good-soft); }
+.it-cell.p10-box.bad .cell-box { stroke: var(--bad); stroke-width: 2.6; fill: var(--bad-soft); }
+.it-cell.p10-box.ghost .cell-box { fill: none; stroke-dasharray: 5 4; }
+.it-cell.p10-box.ghost .cell-text { fill: var(--muted); }
+.it-cell.p10-box.p0 .cell-box { stroke: var(--p0); fill: color-mix(in srgb, var(--p0) 14%, var(--node)); }
+.it-cell.p10-box.p1 .cell-box { stroke: var(--p1); fill: color-mix(in srgb, var(--p1) 14%, var(--node)); }
+.it-cell.p10-box.p2 .cell-box { stroke: var(--p2); fill: color-mix(in srgb, var(--p2) 14%, var(--node)); }
+.it-cell.p10-box.p3 .cell-box { stroke: var(--p3); fill: color-mix(in srgb, var(--p3) 14%, var(--node)); }
+.it-state.p10-cmp .st-shape { fill: var(--node); stroke: var(--wire); stroke-width: 1.8; }
+.it-state.p10-cmp .st-text { font: 700 18px var(--mono); }
+.it-state.p10-cmp.act .st-shape { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2.6; }
+.it-state.p10-cmp.bad .st-shape { fill: var(--bad-soft); stroke: var(--bad); stroke-width: 2.6; }
+.it-state.p10-cmp.good .st-shape { fill: var(--good-soft); stroke: var(--good); stroke-width: 2.6; }
+.it-region.p10-unit .region-box { fill: color-mix(in srgb, var(--surface2) 55%, transparent); stroke: var(--border); stroke-width: 1.2; stroke-dasharray: 6 4; }
+.it-chip.p10-addr .chip-box { stroke: var(--accent); stroke-width: 2; fill: var(--accent-soft); }
+.it-chip.p10-addr .chip-text { fill: var(--accent-deep); font-weight: 700; }
+.it-chip.p10-addr.good .chip-box { stroke: var(--good); fill: var(--good-soft); } .it-chip.p10-addr.good .chip-text { fill: var(--good); }
+.it-chip.p10-addr.bad .chip-box { stroke: var(--bad); fill: var(--bad-soft); } .it-chip.p10-addr.bad .chip-text { fill: var(--bad); }
+.it-text.p10-sum .free-text { font: 700 15px var(--mono); fill: var(--text); }
+.it-text.p10-sum.good .free-text { fill: var(--good); }
+.it-text.p10-sum.bad .free-text { fill: var(--bad); }
+.it-text.p0 .free-text { fill: var(--p0); font-weight: 700; } .it-text.p1 .free-text { fill: var(--p1); font-weight: 700; }
+.it-text.p2 .free-text { fill: var(--p2); font-weight: 700; } .it-text.p3 .free-text { fill: var(--p3); font-weight: 700; }
+.it-text.p4 .free-text { fill: var(--p4); font-weight: 700; } .it-text.p5 .free-text { fill: var(--p5); font-weight: 700; }
