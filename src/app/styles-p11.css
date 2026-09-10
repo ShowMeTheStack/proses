@@ -1,0 +1,42 @@
+/* Part 11 (virtual memory), demand paging to reference strings: table cells (a page table, a frame table, the steps
+   of a fault), the page cache and file of mmap, copy-on-write frames, cost bars. */
+.it-cell.p11-th .cell-box { fill: var(--surface2); stroke: var(--border); stroke-width: 1; }
+.it-cell.p11-th .cell-text { font: 700 12px var(--font); fill: var(--muted); }
+.it-cell.p11-td .cell-box { fill: var(--node); stroke: var(--border); stroke-width: 1; }
+.it-cell.p11-td .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.p11-td.name .cell-text { font-family: var(--font); }
+.it-cell.p11-td.muted .cell-text { fill: var(--muted); font-weight: 500; }
+.it-cell.p11-td.dim { opacity: 0.45; }
+.it-cell.p11-td.act .cell-box { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
+.it-cell.p11-td.act .cell-text { fill: var(--accent-deep); font-weight: 700; }
+.it-cell.p11-td.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2; }
+.it-cell.p11-td.good .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 2; }
+.it-cell.p11-td.good .cell-text { fill: var(--good); font-weight: 700; }
+.it-cell.p11-td.bad .cell-box { fill: var(--bad-soft); stroke: var(--bad); stroke-width: 2; }
+.it-cell.p11-td.bad .cell-text { fill: var(--bad); font-weight: 700; }
+.it-cell.p11-td.on .cell-text { fill: var(--good); font-weight: 800; }
+.it-cell.p11-td.off .cell-text { fill: var(--bad); font-weight: 800; }
+.it-cell.p11-td.shared .cell-box { fill: color-mix(in srgb, var(--p2) 18%, var(--node)); }
+.it-cell.p11-td.zero .cell-box { fill: color-mix(in srgb, var(--muted) 18%, var(--node)); }
+.it-cell.p11-td.dirty .cell-box { fill: color-mix(in srgb, var(--bad) 14%, var(--node)); }
+.it-cell.p11-td.p0 .cell-text { fill: var(--p0); font-weight: 700; }
+.it-cell.p11-td.p1 .cell-text { fill: var(--p1); font-weight: 700; }
+/* bars: a cost, a fault total */
+.it-cell.p11-bar .cell-box { stroke: none; fill: color-mix(in srgb, var(--accent) 60%, var(--node)); }
+.it-cell.p11-bar.disk .cell-box { fill: var(--bad); }
+.it-cell.p11-bar.cpu .cell-box { fill: color-mix(in srgb, var(--good) 70%, var(--node)); }
+.it-cell.p11-bar.soft .cell-box { fill: color-mix(in srgb, var(--node-line) 55%, var(--node)); }
+.it-cell.p11-bar.best .cell-box { fill: var(--good); }
+.it-cell.p11-bar.worst .cell-box { fill: var(--bad); }
+.it-cell.p11-bar.act .cell-box { fill: var(--accent); }
+/* source code lines */
+.it-text.p11-code .free-text { font: 500 13px var(--mono); fill: var(--text); white-space: pre; }
+.it-text.p11-code.act .free-text { fill: var(--accent-deep); font-weight: 700; }
+.it-region.p11-line .region-box { fill: var(--accent-soft); stroke: none; }
+/* small marks under a frame grid */
+.it-text.p11-mark .free-text { font: 700 12px var(--mono); fill: var(--muted); }
+.it-text.p11-mark.bad .free-text { fill: var(--bad); } .it-text.p11-mark.good .free-text { fill: var(--good); }
+.it-text.p11-mark.act .free-text { fill: var(--accent); }
+.it-dot.p11-ref .dot-shape { fill: var(--wire); }
+.it-dot.p11-ref.w .dot-shape { fill: var(--bad); }
+.it-dot.p11-ref.f .dot-shape { fill: var(--accent); }
