@@ -1,0 +1,89 @@
+/* Part 12 (mass storage) and the helpers parts 12-14 share (src/topics/p12-0-common.js): platters seen from above
+   and from the side, timelines of lanes, the disk arm's path, SSD pages, codes. The current step is copper. */
+.it-path.pl-disc .free-path { fill: color-mix(in srgb, var(--node-line) 10%, var(--node)); stroke: var(--node-line); stroke-width: 1.6; }
+.it-path.pl-hub .free-path { fill: var(--surface2); stroke: var(--node-line); stroke-width: 1.4; }
+.it-path.pl-ring .free-path { stroke: color-mix(in srgb, var(--node-line) 55%, transparent); stroke-width: 1; }
+.it-path.pl-zone .free-path { stroke: var(--p2); stroke-width: 2; stroke-dasharray: 6 4; }
+.it-path.pl-track .free-path { stroke: var(--accent); stroke-width: 2; fill-rule: evenodd; fill: color-mix(in srgb, var(--accent) 16%, transparent); }
+.it-path.pl-tick .free-path { stroke: var(--accent-deep); stroke-width: 1.1; }
+.it-path.pl-sec .free-path { fill: var(--accent); stroke: var(--accent-deep); stroke-width: 1.4; }
+.it-path.pl-sec.target .free-path { fill: color-mix(in srgb, var(--p0) 70%, transparent); stroke: var(--p0); }
+.it-dot.pl-mark .dot-shape { fill: var(--text); }
+.it-line.pl-arm .plain-line { stroke: var(--text); stroke-width: 5; stroke-linecap: round; opacity: 0.8; }
+.it-dot.pl-pivot .dot-shape { fill: var(--surface3); stroke: var(--text); stroke-width: 2; }
+.it-dot.pl-headdot .dot-shape { fill: var(--accent); stroke: var(--text); stroke-width: 1.5; }
+.it-cell.pl-spindle .cell-box { fill: var(--surface3); stroke: var(--node-line); }
+.it-cell.pl-side .cell-box { fill: color-mix(in srgb, var(--node-line) 30%, var(--node)); stroke: var(--node-line); }
+.it-cell.pl-headbox .cell-box { fill: var(--accent); stroke: var(--accent-deep); }
+.it-line.pl-cyl .plain-line { stroke: var(--accent); stroke-width: 1.8; stroke-dasharray: 5 4; }
+.it-text.act-t .free-text { fill: var(--accent-deep); font-weight: 700; }
+.it-text.calc.good .free-text { fill: var(--good); font-weight: 700; }
+.it-text.calc.muted .free-text { fill: var(--muted); font-weight: 500; }
+
+/* timelines: a lane's track, its segments by kind */
+.it-cell.tl-track .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.tl .cell-box { stroke-width: 1; }
+.it-cell.tl .cell-text { font-weight: 600; fill: var(--text); }
+.it-cell.tl.seek .cell-box { fill: color-mix(in srgb, var(--p0) 30%, var(--node)); stroke: var(--p0); }
+.it-cell.tl.rot .cell-box { fill: color-mix(in srgb, var(--p3) 34%, var(--node)); stroke: var(--p3); }
+.it-cell.tl.xfer .cell-box { fill: color-mix(in srgb, var(--p1) 34%, var(--node)); stroke: var(--p1); }
+.it-cell.tl.over .cell-box { fill: color-mix(in srgb, var(--p2) 24%, var(--node)); stroke: var(--p2); }
+.it-cell.tl.busy .cell-box { fill: color-mix(in srgb, var(--accent) 30%, var(--node)); stroke: var(--accent); }
+.it-cell.tl.wait .cell-box { fill: color-mix(in srgb, var(--s-blocked) 28%, var(--node)); stroke: var(--s-blocked); }
+.it-cell.tl.free .cell-box { fill: color-mix(in srgb, var(--good) 20%, var(--node)); stroke: var(--good); }
+.it-cell.tl.idle .cell-box { fill: var(--surface); stroke: var(--border); stroke-dasharray: 3 3; }
+.it-cell.tl.act .cell-box { stroke: var(--accent-deep); stroke-width: 2.6; }
+.it-line.tl-now .plain-line { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 4 3; }
+
+/* the disk arm's path: cylinders across, time down */
+.it-path.arm-path .free-path { stroke: var(--accent); stroke-width: 2.4; stroke-linejoin: round; }
+.it-path.arm-path.jump .free-path { stroke-dasharray: 6 5; stroke-width: 1.8; }
+.it-path.arm-path.ghost .free-path { stroke: var(--node-line); stroke-width: 1.4; }
+.it-dot.req .dot-shape { fill: var(--node); stroke: var(--p0); stroke-width: 2; }
+.it-dot.req.done .dot-shape { fill: var(--p0); }
+.it-dot.req.act .dot-shape { fill: var(--accent); stroke: var(--accent-deep); }
+.it-dot.req.late .dot-shape { stroke: var(--p4); }
+.it-dot.req.late.done .dot-shape { fill: var(--p4); }
+.it-cell.q .cell-box { fill: var(--node); stroke: var(--p0); stroke-width: 1.6; }
+.it-cell.q.done .cell-box { fill: color-mix(in srgb, var(--p0) 18%, var(--node)); stroke: color-mix(in srgb, var(--p0) 50%, transparent); }
+.it-cell.q.done .cell-text { fill: var(--muted); }
+.it-cell.q.act .cell-box { fill: color-mix(in srgb, var(--accent) 30%, var(--node)); stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.q.late .cell-box { stroke: var(--p4); }
+.it-cell.q.wait .cell-box { stroke-dasharray: 4 3; stroke: var(--node-line); }
+.it-cell.bar12 .cell-box { fill: color-mix(in srgb, var(--p0) 30%, var(--node)); stroke: var(--p0); }
+.it-cell.bar12.best .cell-box { fill: color-mix(in srgb, var(--good) 34%, var(--node)); stroke: var(--good); }
+.it-cell.bar12.worst .cell-box { fill: color-mix(in srgb, var(--hot) 24%, var(--node)); stroke: var(--hot); }
+.it-cell.bar12.act .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+
+/* SSD pages: free, valid, invalid; blocks with their erase counts */
+.it-cell.pg .cell-box { stroke-width: 1.2; }
+.it-cell.pg.free .cell-box { fill: var(--free); stroke: var(--border); }
+.it-cell.pg.valid .cell-box { fill: color-mix(in srgb, var(--p1) 28%, var(--node)); stroke: var(--p1); }
+.it-cell.pg.invalid .cell-box { fill: color-mix(in srgb, var(--hot) 16%, var(--node)); stroke: color-mix(in srgb, var(--hot) 70%, transparent); stroke-dasharray: 4 3; }
+.it-cell.pg.invalid .cell-text { fill: var(--muted); text-decoration: line-through; }
+.it-cell.pg.act .cell-box { fill: color-mix(in srgb, var(--accent) 36%, var(--node)); stroke: var(--accent); stroke-width: 2.6; stroke-dasharray: none; }
+.it-cell.pg.src .cell-box { stroke: var(--accent); stroke-width: 2.4; }
+.it-cell.pg .cell-text { font-family: var(--mono); font-weight: 600; }
+.it-region.blk .region-box { fill: var(--surface); stroke: var(--node-line); stroke-width: 1.2; }
+.it-region.blk.active .region-box { stroke: var(--p1); stroke-width: 2.2; }
+.it-region.blk.victim .region-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.4; }
+.it-region.blk.erased .region-box { fill: color-mix(in srgb, var(--good) 10%, var(--surface)); stroke: var(--good); stroke-width: 2.2; }
+.it-cell.l2p .cell-box { fill: var(--node); stroke: var(--node-line); }
+.it-cell.l2p.act .cell-box { fill: color-mix(in srgb, var(--accent) 26%, var(--node)); stroke: var(--accent); stroke-width: 2.2; }
+.it-cell.l2p.none .cell-text { fill: var(--muted); }
+.it-cell.l2p .cell-text { font-family: var(--mono); }
+.it-cell.pl-headbox.off .cell-box { fill: var(--surface3); stroke: var(--node-line); }
+.it-bitmap.ssdmap .bm-frame { fill: none; stroke: none; }
+.it-bitmap.ssdmap .bm.b0 { fill: var(--free); }
+.it-bitmap.ssdmap .bm.b1 { fill: color-mix(in srgb, var(--p1) 55%, var(--node)); }
+.it-bitmap.ssdmap .bm.b2 { fill: color-mix(in srgb, var(--hot) 45%, var(--node)); }
+.it-bitmap.ssdmap .bm.b3 { fill: var(--p1); }
+.it-bitmap.ssdmap .bm.b4 { fill: var(--accent); }
+.it-cell.rd-data.mirror .cell-box { fill: color-mix(in srgb, var(--p0) 8%, var(--node)); stroke-dasharray: 5 3; }
+.it-cell.rd-par.q .cell-box { fill: color-mix(in srgb, var(--p5) 24%, var(--node)); stroke: var(--p5); }
+/* Hamming's three checks as overlapping circles */
+.it-ellipse.hm-ring .ell-shape { fill: color-mix(in srgb, var(--p0) 5%, transparent); stroke: var(--p0); stroke-width: 1.8; }
+.it-ellipse.hm-ring.p2 .ell-shape { fill: color-mix(in srgb, var(--p1) 5%, transparent); stroke: var(--p1); }
+.it-ellipse.hm-ring.p3 .ell-shape { fill: color-mix(in srgb, var(--p2) 5%, transparent); stroke: var(--p2); }
+.it-ellipse.hm-ring.lit .ell-shape { fill: color-mix(in srgb, var(--accent) 12%, transparent); stroke: var(--accent); stroke-width: 2.6; }
+.it-ellipse.hm-ring.fail .ell-shape { fill: color-mix(in srgb, var(--hot) 14%, transparent); stroke: var(--hot); stroke-width: 2.8; stroke-dasharray: 6 4; }
