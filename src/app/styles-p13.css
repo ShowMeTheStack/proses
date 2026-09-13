@@ -1,0 +1,104 @@
+/* Part 13 (I/O systems): the system drawn as boxes on a bus, device registers bit by bit, the kinds of CPU and bus
+   time on a timeline, process lanes (user, kernel, blocked, ready), buffer slots, cache lines, request queues and
+   the layers a read passes through. The current step is copper; waiting is amber; time the CPU gets back is green. */
+.it-cell.sys .cell-box { fill: var(--node); stroke: var(--node-line); stroke-width: 1.4; }
+.it-cell.sys .cell-text { font-weight: 650; fill: var(--text); }
+.it-cell.sys.lit .cell-box { fill: color-mix(in srgb, var(--accent) 20%, var(--node)); stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.sys.dim0 .cell-box { stroke-dasharray: 4 3; }
+.it-cell.reg .cell-box { fill: var(--surface2); stroke: var(--node-line); }
+.it-cell.reg .cell-text { font-family: var(--mono); font-weight: 600; fill: var(--text); }
+.it-cell.reg.lit .cell-box { fill: color-mix(in srgb, var(--accent) 30%, var(--node)); stroke: var(--accent); stroke-width: 2.4; }
+.it-cell.reg.dev .cell-box { stroke: var(--p2); stroke-width: 2.4; fill: color-mix(in srgb, var(--p2) 18%, var(--node)); }
+.it-line.bus13 .plain-line { stroke: var(--node-line); stroke-width: 7; stroke-linecap: round; opacity: 0.55; }
+.it-line.bus13.lit .plain-line { stroke: var(--accent); opacity: 0.9; }
+.it-line.drop13 .plain-line { stroke: var(--node-line); stroke-width: 2.4; }
+.it-line.drop13.lit .plain-line { stroke: var(--accent); stroke-width: 3.2; }
+.it-line.irq13 .plain-line { stroke: var(--node-line); stroke-width: 1.6; stroke-dasharray: 5 4; }
+.it-line.irq13.lit .plain-line { stroke: var(--hot); stroke-width: 2.8; stroke-dasharray: none; }
+.it-text.irq13.lit .free-text { fill: var(--hot-deep); font-weight: 700; }
+
+/* CPU, bus and device time by kind */
+.it-cell.tl.io-cmd .cell-box { fill: color-mix(in srgb, var(--p2) 30%, var(--node)); stroke: var(--p2); }
+.it-cell.tl.io-poll .cell-box { fill: color-mix(in srgb, var(--s-blocked) 38%, var(--node)); stroke: var(--s-blocked); }
+.it-cell.tl.io-copy .cell-box { fill: color-mix(in srgb, var(--p0) 34%, var(--node)); stroke: var(--p0); }
+.it-cell.tl.io-irq .cell-box { fill: color-mix(in srgb, var(--hot) 32%, var(--node)); stroke: var(--hot); }
+.it-cell.tl.io-setup .cell-box { fill: color-mix(in srgb, var(--p5) 32%, var(--node)); stroke: var(--p5); }
+.it-cell.tl.io-free .cell-box { fill: color-mix(in srgb, var(--good) 16%, var(--node)); stroke: var(--good); stroke-dasharray: 4 3; }
+.it-cell.tl.io-busy .cell-box { fill: color-mix(in srgb, var(--p1) 30%, var(--node)); stroke: var(--p1); }
+.it-cell.tl.io-status .cell-box { fill: color-mix(in srgb, var(--s-blocked) 26%, var(--node)); stroke: var(--s-blocked); }
+.it-cell.tl.io-data .cell-box { fill: color-mix(in srgb, var(--p0) 30%, var(--node)); stroke: var(--p0); }
+.it-cell.tl.io-dma .cell-box { fill: color-mix(in srgb, var(--p5) 34%, var(--node)); stroke: var(--p5); }
+/* process states on a lane */
+.it-cell.tl.ps-user .cell-box { fill: color-mix(in srgb, var(--s-running) 30%, var(--node)); stroke: var(--s-running); }
+.it-cell.tl.ps-kernel .cell-box { fill: color-mix(in srgb, var(--p2) 28%, var(--node)); stroke: var(--p2); }
+.it-cell.tl.ps-blocked .cell-box { fill: color-mix(in srgb, var(--s-blocked) 30%, var(--node)); stroke: var(--s-blocked); }
+.it-cell.tl.ps-ready .cell-box { fill: color-mix(in srgb, var(--s-ready) 16%, var(--node)); stroke: var(--s-ready); stroke-dasharray: 4 3; }
+.it-cell.tl.ps-idle .cell-box { fill: var(--surface); stroke: var(--border); stroke-dasharray: 3 3; }
+.it-cell.tl.ps-B .cell-box { fill: color-mix(in srgb, var(--p0) 26%, var(--node)); stroke: var(--p0); }
+.it-cell.tl.ps-wait .cell-box { fill: color-mix(in srgb, var(--s-blocked) 30%, var(--node)); stroke: var(--s-blocked); }
+.it-cell.tl.ps-move .cell-box { fill: color-mix(in srgb, var(--p5) 30%, var(--node)); stroke: var(--p5); }
+.it-cell.tl.ps-compute .cell-box { fill: color-mix(in srgb, var(--s-running) 30%, var(--node)); stroke: var(--s-running); }
+.it-cell.tl.pr0 .cell-box { fill: color-mix(in srgb, var(--p0) 28%, var(--node)); stroke: var(--p0); }
+.it-cell.tl.pr1 .cell-box { fill: color-mix(in srgb, var(--p1) 28%, var(--node)); stroke: var(--p1); }
+.it-cell.tl.pr2 .cell-box { fill: color-mix(in srgb, var(--p2) 28%, var(--node)); stroke: var(--p2); }
+.it-cell.tl.pr3 .cell-box { fill: color-mix(in srgb, var(--p3) 30%, var(--node)); stroke: var(--p3); }
+.it-cell.tl.pr4 .cell-box { fill: color-mix(in srgb, var(--p4) 26%, var(--node)); stroke: var(--p4); }
+.it-cell.tl.pr5 .cell-box { fill: color-mix(in srgb, var(--p5) 28%, var(--node)); stroke: var(--p5); }
+.it-cell.swatch13 .cell-box { stroke-width: 1.3; }
+
+/* bits of a register */
+.it-cell.rb .cell-box { fill: var(--node); stroke: var(--border); }
+.it-cell.rb .cell-text { font-family: var(--mono); font-weight: 600; fill: var(--muted); }
+.it-cell.rb.one .cell-box { fill: color-mix(in srgb, var(--p0) 24%, var(--node)); stroke: var(--p0); }
+.it-cell.rb.one .cell-text { fill: var(--text); }
+.it-cell.rb.lit .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.rname .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.rname .cell-text { font-weight: 700; fill: var(--muted); }
+
+/* cache lines and queues */
+.it-cell.cl .cell-box { fill: var(--node); stroke: var(--node-line); }
+.it-cell.cl .cell-text { font-family: var(--mono); font-weight: 650; fill: var(--text); }
+.it-cell.cl.empty .cell-box { fill: var(--free); stroke: var(--border); stroke-dasharray: 4 3; }
+.it-cell.cl.dirty .cell-box { fill: color-mix(in srgb, var(--s-blocked) 26%, var(--node)); stroke: var(--s-blocked); stroke-width: 2; }
+.it-cell.cl.hit .cell-box { fill: color-mix(in srgb, var(--good) 22%, var(--node)); stroke: var(--good); stroke-width: 2.6; }
+.it-cell.cl.miss .cell-box { fill: color-mix(in srgb, var(--accent) 26%, var(--node)); stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.cl.pre .cell-box { fill: color-mix(in srgb, var(--p5) 22%, var(--node)); stroke: var(--p5); stroke-width: 2.2; }
+.it-cell.cl.gone .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.2; stroke-dasharray: 5 4; }
+.it-cell.op13 .cell-box { fill: var(--surface); stroke: var(--border); }
+.it-cell.op13 .cell-text { font-family: var(--mono); font-weight: 600; fill: var(--muted); }
+.it-cell.op13.done .cell-box { fill: var(--surface2); }
+.it-cell.op13.done .cell-text { fill: var(--text); }
+.it-cell.op13.act .cell-box { fill: color-mix(in srgb, var(--accent) 26%, var(--node)); stroke: var(--accent); stroke-width: 2.4; }
+.it-cell.op13.act .cell-text { fill: var(--text); font-weight: 750; }
+.it-cell.rq .cell-box { fill: var(--node); stroke: var(--p0); stroke-width: 1.6; }
+.it-cell.rq .cell-text { font-family: var(--mono); font-weight: 600; }
+.it-cell.rq.w .cell-box { stroke: var(--p3); }
+.it-cell.rq.merged .cell-box { fill: color-mix(in srgb, var(--p5) 20%, var(--node)); stroke: var(--p5); stroke-width: 2.2; }
+.it-cell.rq.act .cell-box { fill: color-mix(in srgb, var(--accent) 30%, var(--node)); stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.rq.done .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.rq.done .cell-text { fill: var(--muted); }
+.it-cell.rq.late .cell-box { stroke: var(--hot); stroke-width: 2.4; }
+
+/* the layer stack of a read */
+.it-cell.ly .cell-box { fill: var(--node); stroke: var(--node-line); }
+.it-cell.ly .cell-text { font-weight: 650; fill: var(--text); }
+.it-cell.ly.user .cell-box { fill: color-mix(in srgb, var(--s-running) 12%, var(--node)); }
+.it-cell.ly.kernel .cell-box { fill: color-mix(in srgb, var(--p2) 10%, var(--node)); }
+.it-cell.ly.device .cell-box { fill: color-mix(in srgb, var(--p3) 14%, var(--node)); }
+.it-cell.ly.seen .cell-box { stroke: var(--accent); stroke-width: 1.8; }
+.it-cell.ly.act .cell-box { fill: color-mix(in srgb, var(--accent) 30%, var(--node)); stroke: var(--accent); stroke-width: 2.8; }
+.it-cell.ly.act .cell-text { font-weight: 800; }
+.it-region.band13 .region-box { fill: color-mix(in srgb, var(--node-line) 6%, transparent); stroke: var(--border); stroke-dasharray: 5 4; }
+.it-token.req13 .token-dot { fill: var(--accent); stroke: var(--accent-deep); }
+.it-token.req13 .token-text { fill: var(--accent-text); font-weight: 800; }
+.it-text.mode13 .free-text { font-weight: 700; fill: var(--muted); }
+.it-cell.pstate .cell-box { stroke-width: 2; }
+.it-cell.pstate.running .cell-box { fill: var(--s-running-soft); stroke: var(--s-running); }
+.it-cell.pstate.blocked .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); }
+.it-cell.pstate.ready .cell-box { fill: var(--s-ready-soft); stroke: var(--s-ready); }
+.it-cell.pstate .cell-text { font-weight: 700; fill: var(--text); }
+.it-path.irq13 .free-path { stroke: var(--node-line); stroke-width: 1.6; stroke-dasharray: 5 4; }
+.it-path.irq13.lit .free-path { stroke: var(--hot); stroke-width: 2.8; stroke-dasharray: none; }
+.it-cell.ent13 .cell-box { fill: var(--surface); stroke: var(--border); }
+.it-cell.ent13 .cell-text { font-weight: 600; fill: var(--text); }
+.it-cell.ent13.act .cell-box { fill: color-mix(in srgb, var(--accent) 26%, var(--node)); stroke: var(--accent); stroke-width: 2.4; }
