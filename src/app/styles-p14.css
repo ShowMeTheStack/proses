@@ -1,0 +1,57 @@
+/* Part 14 (the file-system interface): the three tables of open files (src/stage/kit-p14-tables.js), directory
+   trees of names and inodes, permission bits. Processes are panels, open-file entries amber, inodes blue; the
+   current step is copper, an inode with no names left (an orphan) pink. */
+.it-region.ft-proc .region-box { fill: var(--surface); stroke: var(--border); }
+.it-region.ft-proc.act .region-box { stroke: var(--accent); stroke-width: 1.8; }
+.it-cell.ft-fd .cell-box { fill: var(--surface2); stroke: var(--node-line); }
+.it-cell.ft-fd .cell-text { font-family: var(--mono); font-weight: 700; }
+.it-cell.ft-file .cell-box { fill: color-mix(in srgb, var(--p3) 16%, var(--node)); stroke: var(--p3); stroke-width: 1.4; }
+.it-cell.ft-file.other .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-dasharray: 4 3; }
+.it-cell.ft-ino .cell-box { fill: color-mix(in srgb, var(--p0) 14%, var(--node)); stroke: var(--p0); stroke-width: 1.4; }
+.it-cell.ft-ino.orphan .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-dasharray: 5 3; }
+.it-cell.ft-fd.act .cell-box, .it-cell.ft-file.act .cell-box, .it-cell.ft-ino.act .cell-box { fill: color-mix(in srgb, var(--accent) 24%, var(--node)); stroke: var(--accent); stroke-width: 2.4; }
+.it-cell.ft-file .cell-text, .it-cell.ft-ino .cell-text { font-weight: 600; }
+.it-edge.ft-arrow .edge-path { stroke: var(--edge); stroke-width: 1.6; }
+.it-edge.ft-arrow.act .edge-path { stroke: var(--accent); stroke-width: 2.4; }
+.it-cell.byte.ft-eof .cell-box { fill: var(--surface2); stroke: var(--border); stroke-dasharray: 3 3; }
+.it-head.ft-off .head-tag { fill: var(--p3); }
+.it-head.ft-off .head-text { fill: #1b1300; }
+
+/* directory trees: inodes as boxes, names on the edges */
+.it-state.tnode.dir14 .st-shape { fill: color-mix(in srgb, var(--p3) 18%, var(--node)); stroke: var(--p3); }
+.it-state.tnode.file14 .st-shape { fill: color-mix(in srgb, var(--p0) 14%, var(--node)); stroke: var(--p0); }
+.it-state.tnode.link14 .st-shape { fill: color-mix(in srgb, var(--p2) 14%, var(--node)); stroke: var(--p2); stroke-dasharray: 5 3; }
+.it-state.tnode.mnt14 .st-shape { fill: color-mix(in srgb, var(--p5) 18%, var(--node)); stroke: var(--p5); stroke-width: 2.2; }
+.it-state.tnode.orphan14 .st-shape { fill: var(--hot-soft); stroke: var(--hot); stroke-dasharray: 5 3; }
+.it-state.tnode.act .st-shape { fill: color-mix(in srgb, var(--accent) 26%, var(--node)); stroke: var(--accent); stroke-width: 2.6; }
+.it-state.tnode.seen .st-shape { stroke: var(--accent); stroke-width: 2; }
+.it-state.tnode.bad .st-shape { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.4; }
+.it-edge.tedge.extra .edge-path { stroke-dasharray: 6 4; stroke: var(--p2); }
+.it-edge.tedge.sym .edge-path { stroke-dasharray: 2 4; stroke: var(--p2); stroke-width: 2; }
+.it-edge.tedge.seen .edge-path { stroke: var(--accent); stroke-width: 2.2; }
+.it-region.dev14 .region-box { fill: color-mix(in srgb, var(--p5) 6%, var(--st-bg)); stroke: var(--p5); stroke-dasharray: 6 4; }
+
+/* permission bits */
+.it-cell.pb .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.pb.on .cell-box { fill: color-mix(in srgb, var(--good) 20%, var(--node)); stroke: var(--good); }
+.it-cell.pb .cell-text { font-family: var(--mono); font-weight: 700; }
+.it-cell.pb.off .cell-text { fill: var(--muted); }
+.it-cell.pb.act .cell-box { stroke: var(--accent); stroke-width: 2.8; }
+.it-cell.pb.deny .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.6; }
+.it-text.good14 .free-text { fill: var(--good); font-weight: 700; }
+.it-text.bad14 .free-text { fill: var(--hot-deep); font-weight: 700; }
+.it-cell.ft-tag .cell-box { fill: color-mix(in srgb, var(--accent) 22%, var(--node)); stroke: var(--accent); stroke-width: 1.4; }
+.it-cell.ft-tag .cell-text { font: 700 13px var(--font); fill: var(--accent-deep); }
+.it-text.code.mono.fold .free-text { fill: var(--muted); }
+.it-cell.pl-comp .cell-box { fill: var(--surface2); stroke: var(--node-line); }
+.it-cell.pl-comp.done .cell-box { fill: color-mix(in srgb, var(--good) 14%, var(--node)); stroke: var(--good); }
+.it-cell.pl-comp.act .cell-box { fill: color-mix(in srgb, var(--accent) 26%, var(--node)); stroke: var(--accent); stroke-width: 2.4; }
+.it-cell.ft-sym .cell-box { fill: color-mix(in srgb, var(--p2) 12%, var(--node)); stroke: var(--p2); stroke-dasharray: 5 3; }
+.it-cell.ft-sym.act .cell-box, .it-cell.ft-ino.act .cell-box { stroke-dasharray: none; }
+.it-state.tnode.dup14 .st-shape { fill: var(--surface); stroke: var(--p0); stroke-dasharray: 5 3; }
+.it-state.tnode.hidden14 { opacity: 0.38; }
+.it-edge.tedge.mnt .edge-path { stroke: var(--p5); stroke-width: 2.4; stroke-dasharray: 7 4; }
+.it-edge.tedge.mnt .edge-label { fill: var(--p5); font-weight: 700; }
+.it-cell.pb.faded { opacity: 0.45; }
+.it-cell.pb.faded .cell-box { fill-opacity: 0.35; stroke-opacity: 0.4; }
+.it-cell.pb.faded .cell-text { opacity: 0.45; }
