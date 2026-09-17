@@ -1,0 +1,48 @@
+/* Part 15 topics (src/topics/p15-*.js): blocks not yet laid out, reserved and set bits, owner colours on the map. */
+.it-cell.dk.blank .cell-box { fill: var(--surface); stroke: var(--border); stroke-dasharray: 3 3; }
+.it-cell.dk.blank .cell-text { fill: var(--muted); font-weight: 500; }
+.it-cell.byte.one .cell-box { fill: color-mix(in srgb, var(--good) 18%, var(--node)); stroke: var(--good); }
+.it-cell.byte.res .cell-box { fill: var(--surface2); stroke: var(--node-line); }
+.it-cell.byte.res .cell-text { fill: var(--muted); }
+/* a script of commands: done, the one running, still to come */
+.it-cell.cmd .cell-box { fill: var(--surface); stroke: var(--border); }
+.it-cell.cmd .cell-text { font: 600 13px var(--mono); fill: var(--text); }
+.it-cell.cmd.todo .cell-text { fill: var(--muted); font-weight: 500; }
+.it-cell.cmd.done .cell-box { fill: color-mix(in srgb, var(--good) 10%, var(--node)); stroke: color-mix(in srgb, var(--good) 60%, var(--border)); }
+.it-cell.cmd.act .cell-box { fill: color-mix(in srgb, var(--accent) 22%, var(--node)); stroke: var(--accent); stroke-width: 2.4; }
+/* an indirect block on the map: its owner's colour, hatched with a dashed edge */
+.it-cell.dk.ind .cell-box { stroke-dasharray: 4 2; stroke-width: 2; }
+/* metadata blocks when the picture is about files: one neutral colour, so file colours stand out */
+.it-cell.dk.meta .cell-box { fill: var(--surface2); stroke: var(--node-line); }
+.it-cell.dk.meta .cell-text { fill: var(--muted); }
+/* a free block picked out on the map */
+.it-cell.dk.freeb .cell-box { stroke: var(--good); stroke-width: 2; }
+/* the namespace tree of a lookup: inodes passed ringed, the current one lit, links dashed */
+.it-state.tnode.seen .st-shape { stroke: var(--accent); stroke-width: 2.2; }
+.it-state.tnode.link .st-shape { stroke-dasharray: 5 3; }
+/* cache slots: metadata, file data, dirty; an access after the power cut */
+.it-cell.slot-v.metab .cell-box { fill: color-mix(in srgb, var(--p0) 16%, var(--node)); stroke: var(--p0); }
+.it-cell.slot-v.datab .cell-box { fill: color-mix(in srgb, var(--p1) 16%, var(--node)); stroke: var(--p1); }
+.it-cell.cmd.gone .cell-box { stroke-dasharray: 4 3; opacity: 0.5; }
+.it-cell.dk.meta.itab .cell-box { fill: color-mix(in srgb, var(--node-line) 30%, var(--surface2)); stroke: var(--node-line); }
+.it-cell.dk.meta.act .cell-box { fill: color-mix(in srgb, var(--accent) 34%, var(--node)); stroke: var(--accent); stroke-width: 3; }
+/* journal writes by phase: data home, log, commit, checkpoint, freeing the log */
+.it-cell.wr.ph-commit .cell-text { font-weight: 800; }
+.it-cell.wr.done.ph-commit .cell-box { stroke: var(--p2); stroke-width: 2.4; }
+.it-cell.wr.done.ph-checkpoint .cell-box { fill: color-mix(in srgb, var(--p0) 14%, var(--node)); stroke: var(--p0); }
+/* the journal block where replay would start */
+.it-cell.jb.start .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+/* copy-on-write: blocks only an old tree (a snapshot) still uses */
+.it-cell.dk.oldb .cell-box { fill: color-mix(in srgb, var(--p4) 14%, var(--node)); stroke: var(--p4); stroke-dasharray: 4 2; }
+/* the log: checkpoints, summaries, data, inodes, inode-map pieces; dead copies faded */
+.it-cell.dk.lfs-cp .cell-box { fill: color-mix(in srgb, var(--p2) 22%, var(--node)); stroke: var(--p2); }
+.it-cell.dk.lfs-sum .cell-box { fill: var(--surface2); stroke: var(--node-line); }
+.it-cell.dk.lfs-data .cell-box { fill: color-mix(in srgb, var(--p1) 22%, var(--node)); stroke: var(--p1); }
+.it-cell.dk.lfs-inode .cell-box { fill: color-mix(in srgb, var(--p0) 22%, var(--node)); stroke: var(--p0); }
+.it-cell.dk.lfs-imap .cell-box { fill: color-mix(in srgb, var(--p3) 26%, var(--node)); stroke: var(--p3); }
+.it-cell.dk.lfs-free .cell-box { fill: var(--free); stroke: var(--border); }
+.it-cell.dk.lfs-free .cell-text { fill: var(--muted); font-weight: 500; }
+.it-cell.dk.dead .cell-box { fill: var(--surface); stroke-dasharray: 3 3; }
+.it-cell.dk.dead .cell-text { fill: var(--muted); text-decoration: line-through; }
+/* a block never written, on a heat map of writes */
+.it-cell.hm.zero .cell-box { stroke: var(--border); stroke-width: 1; }
