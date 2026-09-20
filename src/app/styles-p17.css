@@ -1,0 +1,58 @@
+/* Part 17 (protection): the access matrix (amcell; domain columns tinted), rings as nested domains, implementation
+   panels, permission chains, stack frames and page permissions. Allowed is green (good), refused or damaged pink
+   (hot), the step's own place the accent. */
+.it-cell.amcell .cell-box { fill: var(--node); stroke: var(--node-line); stroke-width: 1.2; }
+.it-cell.amcell .cell-text { font: 600 13px var(--mono); }
+.it-cell.amcell.dom .cell-box { fill: var(--surface2); }
+.it-cell.amcell.good .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 2; }
+.it-cell.amcell.good .cell-text { fill: var(--good); }
+.it-cell.amcell.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.2; }
+.it-cell.amcell.changed .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 2.2; }
+.it-cell.amcell.changed .cell-text { fill: var(--act-deep); }
+.it-ellipse.pring .ell-shape { fill: color-mix(in srgb, var(--s-ready) 6%, var(--st-bg)); stroke: var(--node-line); stroke-width: 1.6; }
+.it-ellipse.pring.act .ell-shape { fill: var(--act-soft); stroke: var(--act); stroke-width: 2.6; }
+.it-cell.implrow .cell-box { fill: transparent; stroke: transparent; }
+.it-cell.implrow .cell-text { font: 500 13px var(--mono); fill: var(--text); }
+.it-cell.implrow.act .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 1.4; }
+.it-cell.implrow.good .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 1.8; }
+.it-cell.implrow.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 1.8; }
+.it-cell.mode .cell-text { font: 600 14px var(--mono); }
+.it-cell.mode.good .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 2; }
+.it-cell.mode.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.2; }
+.it-cell.mode.act .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 2.2; }
+.it-cell.slot .cell-text { font: 600 13px var(--mono); }
+.it-cell.slot.buf .cell-box { fill: color-mix(in srgb, var(--s-ready) 12%, var(--node)); stroke: var(--s-ready); }
+.it-cell.slot.canary .cell-box { fill: color-mix(in srgb, var(--s-blocked) 18%, var(--node)); stroke: var(--s-blocked); }
+.it-cell.slot.ret .cell-box { fill: var(--surface2); stroke: var(--wire); stroke-width: 1.6; }
+.it-cell.slot.damaged .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.4; stroke-dasharray: 5 3; }
+.it-cell.slot.damaged .cell-text { fill: var(--hot-deep); }
+.it-cell.fill .cell-box { fill: color-mix(in srgb, var(--s-ready) 45%, var(--node)); stroke: none; }
+.it-cell.fill.over .cell-box { fill: color-mix(in srgb, var(--hot) 55%, var(--node)); }
+.it-cell.perm .cell-text { font: 700 14px var(--mono); }
+.it-cell.perm.on .cell-box { fill: var(--good-soft); stroke: var(--good); }
+.it-cell.perm.off .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.perm.off .cell-text { fill: var(--muted); }
+.it-cell.perm.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.2; }
+.it-cell.region0 .cell-box { fill: color-mix(in srgb, var(--p0) 25%, var(--node)); stroke: var(--p0); }
+.it-cell.region1 .cell-box { fill: color-mix(in srgb, var(--p1) 25%, var(--node)); stroke: var(--p1); }
+.it-cell.region2 .cell-box { fill: color-mix(in srgb, var(--p2) 25%, var(--node)); stroke: var(--p2); }
+.it-cell.region3 .cell-box { fill: color-mix(in srgb, var(--p3) 25%, var(--node)); stroke: var(--p3); }
+.it-cell.rec .cell-text { font: 600 13px var(--mono); }
+.it-cell.rec.same .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2; }
+.it-cell.rec.act .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 2; }
+.it-cell.tag.missing .cell-box { fill: none; stroke: var(--s-blocked); stroke-width: 2; stroke-dasharray: 5 3; }
+.it-cell.tag.faded .cell-box { fill: none; stroke: var(--border); stroke-dasharray: 3 3; }
+.it-cell.tag.faded .cell-text { fill: var(--muted); }
+.it-cell.mbit .cell-text { font: 700 14px var(--mono); }
+.it-cell.mbit .cell-box { fill: var(--node); stroke: var(--border); }
+.it-cell.mbit.cls .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 1.8; }
+.it-cell.mbit.cls.good .cell-box { fill: var(--good-soft); stroke: var(--good); }
+.it-cell.mbit.cls.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); }
+.it-cell.mbit.special .cell-text { fill: var(--hot-deep); }
+.it-cell.idbox .cell-text { font: 700 14px var(--mono); }
+.it-cell.idbox.changed .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 2.2; }
+.it-cell.tag.wait .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); stroke-width: 1.8; }
+.it-cell.idbox.tagok .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 2; }
+.it-cell.idbox.tagok .cell-text { fill: var(--good); }
+.it-cell.idbox.taghot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2; }
+.it-cell.idbox.taghot .cell-text { fill: var(--hot-deep); }
