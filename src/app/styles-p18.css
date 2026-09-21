@@ -1,0 +1,28 @@
+/* Part 18 (virtual machines and containers): the two-dimensional walk grid (a host read, a guest entry read, the
+   data), I/O paths as stacks of layers, process tables seen through namespaces, and control-group lanes. */
+.it-cell.wcell .cell-text { font: 700 14px var(--mono); }
+.it-cell.wcell.empty .cell-box { fill: var(--surface2); stroke: var(--border); stroke-dasharray: 3 3; }
+.it-cell.wcell.host .cell-box { fill: color-mix(in srgb, var(--p0) 22%, var(--node)); stroke: var(--p0); }
+.it-cell.wcell.guest .cell-box { fill: color-mix(in srgb, var(--p2) 24%, var(--node)); stroke: var(--p2); }
+.it-cell.wcell.data .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 2; }
+.it-cell.wcell.act .cell-box { stroke: var(--act); stroke-width: 3; }
+.it-cell.layer .cell-box { fill: var(--node); stroke: var(--wire); stroke-width: 1.6; }
+.it-cell.layer .cell-text { font: 650 14px var(--font); }
+.it-cell.layer.guest .cell-box { fill: color-mix(in srgb, var(--p2) 12%, var(--node)); stroke: var(--p2); }
+.it-cell.layer.host .cell-box { fill: color-mix(in srgb, var(--p0) 12%, var(--node)); stroke: var(--p0); }
+.it-cell.layer.hw .cell-box { fill: var(--surface2); stroke: var(--wire); }
+.it-cell.layer.act .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 2.6; }
+.it-cell.layer.ns .cell-box { fill: color-mix(in srgb, var(--p1) 12%, var(--node)); stroke: var(--p1); stroke-dasharray: 5 3; }
+.it-edge.hop .edge-label { font: 600 13px var(--font); fill: var(--muted); }
+.it-cell.ptab .cell-text { font: 600 13px var(--mono); }
+.it-cell.ptab.seen .cell-box { fill: var(--good-soft); stroke: var(--good); }
+.it-cell.ptab.hidden .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.ptab.hidden .cell-text { fill: var(--muted); }
+.it-cell.ptab.me .cell-box { fill: var(--act-soft); stroke: var(--act); stroke-width: 2.2; }
+.it-cell.ptab.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2.2; }
+.it-cell.cg0 .cell-box { fill: color-mix(in srgb, var(--p0) 55%, var(--node)); stroke: var(--p0); }
+.it-cell.cg1 .cell-box { fill: color-mix(in srgb, var(--p1) 55%, var(--node)); stroke: var(--p1); }
+.it-cell.cg2 .cell-box { fill: color-mix(in srgb, var(--p2) 55%, var(--node)); stroke: var(--p2); }
+.it-cell.cg3 .cell-box { fill: color-mix(in srgb, var(--p3) 55%, var(--node)); stroke: var(--p3); }
+.it-cell.cgidle .cell-box { fill: var(--surface2); stroke: var(--border); stroke-dasharray: 3 3; }
+.it-cell.cgthr .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); }
