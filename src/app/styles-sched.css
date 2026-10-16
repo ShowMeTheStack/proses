@@ -1,0 +1,59 @@
+/* The scheduling kit (src/stage/kit-gantt.js): Gantt segments coloured by job (--p0 to --p5), the job running now
+   ringed in the accent, ready-queue boxes, multi-level queue lanes, the time cursor and the metrics table. */
+.it-cell.gseg .cell-box { stroke-width: 1.4; }
+.it-cell.gseg .cell-text { font: 700 15px var(--font); fill: var(--node-text); }
+.it-cell.gseg.p0 .cell-box { fill: color-mix(in srgb, var(--p0) 40%, var(--node)); stroke: var(--p0); }
+.it-cell.gseg.p1 .cell-box { fill: color-mix(in srgb, var(--p1) 40%, var(--node)); stroke: var(--p1); }
+.it-cell.gseg.p2 .cell-box { fill: color-mix(in srgb, var(--p2) 40%, var(--node)); stroke: var(--p2); }
+.it-cell.gseg.p3 .cell-box { fill: color-mix(in srgb, var(--p3) 40%, var(--node)); stroke: var(--p3); }
+.it-cell.gseg.p4 .cell-box { fill: color-mix(in srgb, var(--p4) 40%, var(--node)); stroke: var(--p4); }
+.it-cell.gseg.p5 .cell-box { fill: color-mix(in srgb, var(--p5) 40%, var(--node)); stroke: var(--p5); }
+.it-cell.gseg.now .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.gtrack .cell-box { fill: var(--surface2); stroke: var(--border); stroke-dasharray: 4 3; }
+.it-cell.gjob .cell-text { font: 700 15px var(--font); fill: var(--node-text); }
+.it-cell.gjob .cell-box { stroke-width: 1.6; }
+.it-cell.gjob.run .cell-box { stroke: var(--accent); stroke-width: 3; }
+.it-cell.gjob.io .cell-box { stroke-dasharray: 4 3; }
+.it-cell.gjob .cell-sub, .it-cell.gslot .cell-sub { font: 600 12px var(--mono); fill: var(--muted); }
+.it-cell.gslot .cell-box { fill: none; stroke: var(--node-line); stroke-width: 1.4; stroke-dasharray: 5 4; }
+.it-cell.gslot .cell-text { font: 600 13px var(--font); fill: var(--muted); }
+.it-cell.glane .cell-box { fill: var(--s-ready-soft); stroke: color-mix(in srgb, var(--s-ready) 45%, transparent); stroke-width: 1.2; }
+.it-cell.glane.top .cell-box { stroke: var(--s-ready); }
+.it-cell.glane.boost .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 2; }
+.it-cell.gcpu .cell-box { fill: var(--s-running-soft); stroke: var(--s-running); stroke-width: 1.6; }
+.it-cell.gio .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); stroke-width: 1.4; }
+.it-text.glname .free-text { font: 700 16px var(--font); fill: var(--text); }
+.it-text.glsub .free-text { font: 500 12px var(--font); fill: var(--muted); }
+.it-text.glabel .free-text { font: 600 13px var(--font); fill: var(--muted); }
+.it-text.gpol .free-text { font: 700 17px var(--font); fill: var(--text); }
+.it-text.gpolsub .free-text { font: 500 13px var(--font); fill: var(--muted); }
+.it-text.gwhy .free-text { font: 500 14px var(--font); fill: var(--text); }
+.it-text.gwhy.act .free-text { fill: var(--act-deep); font-weight: 650; }
+.it-text.gnow .free-text { font: 700 14px var(--mono); fill: var(--accent); }
+.it-text.gtick .free-text { font-variant-numeric: tabular-nums; }
+.it-path.gcursor .free-path { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 5 4; fill: none; }
+.it-path.gboost .free-path { stroke: var(--hot); stroke-width: 1.6; stroke-dasharray: 3 4; fill: none; }
+.it-text.gboost .free-text { font: 700 12px var(--font); fill: var(--hot-deep); }
+.it-bracket.hot .bracket-path { stroke: var(--hot); stroke-width: 2; fill: none; }
+.it-bracket.hot .bracket-text { fill: var(--hot-deep); font-weight: 700; }
+/* the metrics table */
+.it-cell.gth .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.gth .cell-text { font: 700 13px var(--font); fill: var(--muted); }
+.it-cell.gth.ggroup .cell-text { fill: var(--text); font-size: 14px; }
+.it-cell.gtd .cell-box { fill: var(--node); stroke: var(--border); }
+.it-cell.gtd .cell-text { font: 600 14px var(--mono); fill: var(--node-text); }
+.it-cell.gtd.gfirst .cell-text { font-family: var(--font); font-weight: 700; }
+.it-cell.gtd.gsum .cell-box { fill: var(--surface2); }
+.it-cell.gtd.gsum .cell-text { font-weight: 700; }
+.it-cell.gtd.best .cell-box { fill: var(--good-soft); stroke: var(--good); }
+.it-cell.gtd.best .cell-text { fill: var(--good); }
+.it-cell.gtd.worst .cell-box { fill: var(--hot-soft); stroke: var(--hot); }
+.it-cell.gtd.worst .cell-text { fill: var(--hot-deep); }
+.it-cell.gtd.fresh .cell-box { fill: var(--accent-soft); stroke: var(--accent); }
+.it-cell.gtd.muted .cell-text { fill: var(--muted); font-weight: 500; }
+.it-cell.gtd.p0 .cell-box { fill: color-mix(in srgb, var(--p0) 22%, var(--node)); }
+.it-cell.gtd.p1 .cell-box { fill: color-mix(in srgb, var(--p1) 22%, var(--node)); }
+.it-cell.gtd.p2 .cell-box { fill: color-mix(in srgb, var(--p2) 22%, var(--node)); }
+.it-cell.gtd.p3 .cell-box { fill: color-mix(in srgb, var(--p3) 22%, var(--node)); }
+.it-cell.gtd.p4 .cell-box { fill: color-mix(in srgb, var(--p4) 22%, var(--node)); }
+.it-cell.gtd.p5 .cell-box { fill: color-mix(in srgb, var(--p5) 22%, var(--node)); }

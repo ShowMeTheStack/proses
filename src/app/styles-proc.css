@@ -1,0 +1,53 @@
+/* The process kit (src/stage/kit-proc.js): the code panel, the fork tree, the timeline and the terminal. States
+   colour the tree nodes and the timeline (s-ready, s-running, s-blocked, s-zombie, s-done); p0..p5 tell the
+   processes apart on their pid tags. */
+.it-region.codepanel .region-box { fill: var(--surface); stroke: var(--border); stroke-width: 1.2; }
+.it-text.codetitle.mono .free-text, .it-text.termtitle.mono .free-text { font: 700 13px var(--mono); fill: var(--muted); }
+.it-cell.codeband .cell-box { fill: var(--accent-soft); stroke: color-mix(in srgb, var(--accent) 55%, transparent); stroke-width: 1.2; }
+.it-text.codenum.mono .free-text { font: 500 13px var(--mono); fill: var(--muted); opacity: 0.8; }
+.it-text.codenum.mono.act .free-text { fill: var(--accent-deep); opacity: 1; font-weight: 700; }
+.it-text.code.mono .free-text { font: 500 13px var(--mono); fill: var(--text); white-space: pre; }
+.it-text.code.mono.act .free-text { fill: var(--accent-deep); font-weight: 700; }
+
+/* pid tags: in the code panel coloured by the process's state, in the terminal plain */
+.it-cell.ptag .cell-box { fill: var(--surface3); stroke: var(--node-line); stroke-width: 1.2; }
+.it-cell.ptag .cell-text { font: 700 12px var(--font); fill: var(--text); }
+.it-cell.ptag.s-ready .cell-box { fill: var(--s-ready-soft); stroke: var(--s-ready); }
+.it-cell.ptag.s-running .cell-box { fill: var(--s-running-soft); stroke: var(--s-running); }
+.it-cell.ptag.s-blocked .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); }
+.it-cell.ptag.act .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.ptag.more .cell-box { fill: var(--surface2); stroke: var(--border); stroke-dasharray: 3 2; }
+.it-cell.ptag.more .cell-text { fill: var(--muted); }
+
+/* the fork tree: nodes coloured by state; init and the shell drawn plainer */
+.it-state.pnode .st-text { font: 600 13px var(--font); fill: var(--node-text); }
+.it-state.pnode .st-text:first-child { font-weight: 750; }
+.it-state.pnode.act .st-shape { stroke: var(--accent); stroke-width: 3; }
+.it-line.pedge .plain-line { stroke: var(--node-line); stroke-width: 1.8; }
+.it-line.pedge.adopt .plain-line { stroke: var(--hot); stroke-width: 2.6; stroke-dasharray: 7 4; }
+.it-line.pedge.new .plain-line { stroke: var(--accent); stroke-width: 2.4; }
+
+/* the timeline */
+.it-text.tllabel .free-text { font: 700 12px var(--font); fill: var(--muted); }
+.it-cell.tlcell .cell-box { stroke: none; }
+.it-cell.tlcell.s-ready .cell-box { fill: var(--s-ready-soft); stroke: var(--s-ready); stroke-width: 1; }
+.it-cell.tlcell.s-running .cell-box { fill: var(--s-running); }
+.it-cell.tlcell.s-blocked .cell-box { fill: var(--s-blocked-soft); stroke: var(--s-blocked); stroke-width: 1; }
+.it-cell.tlcell.s-zombie .cell-box { fill: var(--s-zombie-soft); stroke: var(--s-zombie); stroke-width: 1; stroke-dasharray: 3 2; }
+.it-cell.tlcell.s-done .cell-box { fill: none; stroke: none; }
+.it-line.tlnow .plain-line { stroke: var(--accent); stroke-width: 2; }
+
+/* the terminal */
+.it-region.termpanel .region-box { fill: color-mix(in srgb, var(--text) 5%, var(--surface)); stroke: var(--border); stroke-width: 1.2; }
+.it-text.termtext.mono .free-text { font: 500 13px var(--mono); fill: var(--text); white-space: pre; }
+.it-text.termtext.mono.new .free-text { fill: var(--accent-deep); font-weight: 700; }
+.it-text.termtext.mono.buf .free-text { fill: var(--muted); }
+.it-cell.bufbox .cell-box { fill: none; stroke: var(--node-line); stroke-width: 1.2; stroke-dasharray: 4 3; }
+
+/* the state legend */
+.it-cell.swatch .cell-box { stroke-width: 2; }
+.it-text.legtext .free-text { font: 600 13px var(--font); fill: var(--text); }
+.it-line.pedge.adopted .plain-line { stroke: var(--node-line); stroke-dasharray: 7 4; }
+.it-text.legtext.muted .free-text { fill: var(--muted); font-weight: 500; font-style: italic; }
+.it-text.proghead .free-text { font: 750 18px var(--font); fill: var(--text); }
+.it-text.progsub .free-text { font: 500 14px var(--font); fill: var(--muted); }

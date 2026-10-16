@@ -1,0 +1,113 @@
+/* Answer areas beyond the basic ones, and the task card of a challenge: what to do, the goal and the limits. */
+.ans-row { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.ans-row .ans-note { margin: 0; flex: 1 1 260px; }
+.task-card { border: 1px solid var(--border); background: var(--surface); border-radius: 14px; padding: 10px 14px; margin: 10px 0; display: grid; gap: 6px; }
+.tc-row { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 10px; font-size: 14.5px; line-height: 1.5; }
+.tc-k { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.tc-limits { margin: 0; padding-left: 18px; }
+.tc-limits li { margin: 1px 0; }
+@media (max-width: 600px) {
+  .tc-row { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* ---- the operating-systems answer areas (exercises-os-*.js) ---------------------------------------------------- */
+.ex-given { display: grid; width: fit-content; max-width: 100%; min-width: 260px; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 14px; margin: 6px 0 14px; padding: 10px 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; font-size: 14px; }
+.ex-given dt { font-weight: 650; color: var(--muted); }
+.ex-given dd { margin: 0; overflow-wrap: anywhere; }
+.ex-form { display: flex; flex-wrap: wrap; gap: 10px 16px; margin: 8px 0 4px; align-items: flex-end; }
+.ex-field { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 650; color: var(--muted); min-width: 0; }
+.ex-field input, .ex-field select, .ex-field textarea { font-size: 15px; font-weight: 500; color: var(--text); width: 170px; max-width: 100%; }
+.ex-field.wide { flex: 1 1 300px; }
+.ex-field.wide input, .ex-field.wide textarea { width: 100%; }
+.ex-field input.right, .ex-form select.right { border-color: var(--good); background: var(--good-soft); }
+.ex-field input.wrong, .ex-form select.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.ex-outs { min-height: 110px; line-height: 1.5; }
+.ex-grid { margin: 8px 0 4px; }
+.ex-grid .fill-table input { width: 96px; }
+.ex-grid.narrow .fill-table input { width: 46px; padding: 3px 2px; }
+.ex-grid.narrow .fill-table td { padding: 3px; }
+.ex-grid .fill-table thead th small { display: block; font: 600 11px var(--font); color: var(--muted); }
+.ex-listing { margin: 8px 0 14px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.ex-listing .le { border: none; border-radius: 0; }
+
+/* matrices and workloads given */
+.ex-mats { display: flex; flex-wrap: wrap; gap: 14px 22px; margin: 6px 0 14px; align-items: flex-start; }
+.ex-mat { border-collapse: collapse; font-size: 14px; }
+.ex-mat caption { text-align: left; font-weight: 700; font-size: 13px; color: var(--muted); padding-bottom: 4px; }
+.ex-mat th, .ex-mat td { border: 1px solid var(--border); padding: 4px 10px; text-align: center; }
+.ex-mat thead th, .ex-mat tbody th { background: var(--surface2); font-weight: 650; }
+.ex-work { margin: 6px 0 10px; }
+.ex-job { display: inline-block; min-width: 26px; padding: 1px 7px; border-radius: 7px; font: 700 13px var(--mono); color: #fff; text-align: center; }
+.ex-job.p0, .ex-tick.p0, .ex-penbtn.p0 { background: var(--p0); }
+.ex-job.p1, .ex-tick.p1, .ex-penbtn.p1 { background: var(--p1); }
+.ex-job.p2, .ex-tick.p2, .ex-penbtn.p2 { background: var(--p2); }
+.ex-job.p3, .ex-tick.p3, .ex-penbtn.p3 { background: var(--p3); }
+.ex-job.p4, .ex-tick.p4, .ex-penbtn.p4 { background: var(--p4); }
+.ex-job.p5, .ex-tick.p5, .ex-penbtn.p5 { background: var(--p5); }
+:root[data-theme="dark"] .ex-job, :root[data-theme="dark"] .ex-tick, :root[data-theme="dark"] .ex-penbtn { color: #14110f; }
+
+/* the Gantt chart painter */
+.ex-gantt { margin: 10px 0; padding: 12px 14px 8px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+.ex-pal .muted { margin-right: 4px; }
+.ex-pal { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; font-size: 13px; }
+.ex-penbtn { border: 2px solid transparent; border-radius: 8px; padding: 3px 12px; font: 700 13px var(--mono); color: #fff; cursor: pointer; }
+.ex-penbtn.idle { background: repeating-linear-gradient(135deg, var(--surface) 0 5px, color-mix(in srgb, var(--muted) 30%, var(--surface)) 5px 7px); color: var(--text); border: 2px dashed color-mix(in srgb, var(--muted) 75%, transparent); }
+.ex-penbtn.cs { background: var(--surface3); color: var(--text); }
+.ex-penbtn[aria-checked="true"] { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ex-chart { overflow-x: auto; padding-bottom: 4px; }
+.ex-ticks, .ex-axis { display: grid; grid-auto-flow: column; grid-auto-columns: 32px; gap: 3px; width: max-content; }
+.ex-tick { height: 40px; border: 1px solid var(--border); border-radius: 5px; padding: 0; font: 700 12px var(--mono); color: #fff; cursor: pointer; touch-action: none; }
+.ex-tick.idle { background: repeating-linear-gradient(135deg, var(--surface) 0 5px, color-mix(in srgb, var(--muted) 24%, var(--surface)) 5px 7px); border: 1px dashed color-mix(in srgb, var(--muted) 70%, transparent); }
+.ex-tick:hover { border-color: var(--accent); }
+.ex-tick.cs { background: repeating-linear-gradient(45deg, var(--surface3), var(--surface3) 4px, var(--surface2) 4px, var(--surface2) 8px); color: var(--text); font-size: 9px; }
+.ex-tick.wrong { box-shadow: 0 0 0 2px var(--bad); }
+.ex-axis span { font: 11px var(--mono); color: var(--muted); text-align: left; padding-top: 2px; white-space: nowrap; }
+
+/* threads of a semaphore trace */
+.ex-threads { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 6px 0 10px; }
+.ex-thread { border: 1px solid var(--border); border-radius: 10px; padding: 8px 16px 8px 12px; background: var(--surface); }
+.ex-thread ol { margin: 6px 0 0; padding-left: 24px; font-size: 14px; }
+
+/* the resource-allocation graph */
+.ex-ragbox { border: 1px solid var(--border); border-radius: 12px; background: var(--st-bg); margin: 8px 0; overflow-x: auto; }
+.ex-rag { display: block; width: 100%; max-width: 640px; min-width: 300px; height: auto; margin: 0 auto; }
+.ex-rag.right { outline: 2px solid var(--good); outline-offset: -2px; border-radius: 12px; }
+.ex-edge { stroke: var(--edge); stroke-width: 2; }
+.ex-edge.request { stroke-dasharray: 6 4; }
+.ex-arrowhead { fill: var(--edge); }
+.ex-node { cursor: pointer; }
+.ex-node circle:not(.ex-unit), .ex-node rect { fill: var(--node); stroke: var(--node-line); stroke-width: 2; }
+.ex-node text { fill: var(--node-text); font: 700 15px var(--mono); pointer-events: none; }
+.ex-node .ex-unit { fill: var(--node-text); }
+.ex-node:hover circle:not(.ex-unit), .ex-node:hover rect { stroke: var(--accent); }
+.ex-node.on circle:not(.ex-unit), .ex-node.on rect { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 3.5; }
+.ex-node:focus-visible { outline: none; }
+.ex-node:focus-visible circle:not(.ex-unit), .ex-node:focus-visible rect { stroke: var(--accent); stroke-dasharray: 4 3; }
+.ex-picked { color: var(--text); }
+.btn.on { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+
+/* the process table */
+.ex-ptab select { min-width: 110px; }
+.ex-ptab select.right, .ex-ptab td.right { background: var(--good-soft); }
+.ex-ptab select.wrong, .ex-ptab td.wrong { background: var(--bad-soft); }
+.ex-cb label { display: grid; place-items: center; min-height: 32px; cursor: pointer; }
+.ex-cb input { width: 18px; height: 18px; }
+@media (max-width: 600px) {
+  .ex-given { grid-template-columns: 1fr; gap: 0 0; }
+  .ex-given dd { margin-bottom: 6px; }
+  .ex-field input, .ex-field select { width: 140px; }
+}
+
+/* chart rows: a label column, then the ticks; real-time releases and deadlines in their own thin rows */
+.ex-lane { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; width: max-content; }
+.ex-lanelab { width: 86px; box-sizing: border-box; flex: none; font: 600 12px var(--mono); color: var(--muted); text-align: right; }
+.ex-marks { display: grid; grid-auto-flow: column; grid-auto-columns: 32px; gap: 3px; width: max-content; min-height: 18px; margin-left: -16px; }
+.ex-marks span { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+.ex-mk { font: 700 11px var(--mono); font-style: normal; padding: 0 3px; border-radius: 4px; color: #fff; line-height: 15px; }
+:root[data-theme="dark"] .ex-mk { color: #14110f; }
+.ex-mk.p0 { background: var(--p0); } .ex-mk.p1 { background: var(--p1); } .ex-mk.p2 { background: var(--p2); }
+.ex-mk.p3 { background: var(--p3); } .ex-mk.p4 { background: var(--p4); } .ex-mk.p5 { background: var(--p5); }
+.ex-more[hidden] { display: none; }
+:root[data-theme] .ex-penbtn.idle { color: var(--text); }
+.ex-lane:has(.ex-marks) .ex-lanelab { padding-right: 18px; }
+.ex-v.checking { color: var(--muted); align-items: center; } .ex-v.checking .btn { margin-left: 6px; }

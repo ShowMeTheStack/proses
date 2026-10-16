@@ -1,0 +1,79 @@
+/* Synchronisation and deadlock pictures (src/stage/kit-sync.js, kit-bank.js): the philosophers' table and forks,
+   the ring buffer and its pointers, semaphore counters with their queues, program listings with each thread's
+   place, and the banker's tables. Colour: thread states use the s-* classes; the current step is the accent;
+   a wait-for arrow is dashed, and pink (hot) when it closes a cycle. */
+.it-ellipse.sync-table .ell-shape { fill: color-mix(in srgb, var(--s-blocked) 7%, var(--surface2)); stroke: var(--border); stroke-width: 1.6; }
+.it-state.phil .st-text { font-weight: 700; }
+.it-cell.fork .cell-text { font: 700 13px var(--mono); }
+.it-cell.fork.free .cell-box { fill: var(--node); stroke: var(--node-line); stroke-width: 1.4; }
+.it-cell.fork.held .cell-box { fill: var(--wire); stroke: var(--wire); stroke-width: 2; }
+.it-cell.fork.held .cell-text { fill: var(--st-bg); }
+.it-text.meals .free-text { font: 600 13px var(--font); fill: var(--muted); }
+.it-text.meals.up .free-text { fill: var(--good); font-weight: 700; }
+.it-edge.wait .edge-path { stroke: var(--edge); stroke-width: 2; stroke-dasharray: 6 4; }
+.it-edge.wait.hot .edge-path { stroke: var(--hot); stroke-width: 2.8; stroke-dasharray: none; }
+.arrowhead.hot { fill: var(--hot); }
+.it-text.verdict .free-text { font: 700 16px var(--font); fill: var(--text); }
+.it-text.verdict.hot .free-text { fill: var(--hot-deep); }
+.it-text.verdict.good .free-text { fill: var(--good); }
+
+/* the ring buffer */
+.it-ellipse.ring-track .ell-shape { fill: none; stroke: var(--border); stroke-width: 10; }
+.it-cell.slot .cell-text { font: 700 15px var(--mono); }
+.it-cell.slot.empty .cell-box { fill: var(--free); stroke: var(--node-line); stroke-dasharray: 4 3; }
+.it-cell.slot.full .cell-box { fill: color-mix(in srgb, var(--used) 45%, var(--node)); stroke: var(--used); stroke-width: 1.8; }
+.it-cell.slot.act .cell-box { stroke: var(--accent); stroke-width: 3; stroke-dasharray: none; }
+.it-state.ptr .st-shape { stroke-width: 2; }
+.it-state.ptr .st-text { font: 700 13px var(--mono); }
+.it-state.ptr.pin .st-shape { fill: var(--cls2-soft, var(--s-running-soft)); stroke: var(--s-running); }
+.it-state.ptr.pout .st-shape { fill: var(--cls1-soft); stroke: var(--cls1); }
+.it-edge.ptr .edge-path { stroke-width: 2; }
+.it-text.ringnote .free-text { font: 700 15px var(--font); fill: var(--text); }
+
+/* semaphores and wait queues */
+.it-text.semname .free-text { font: 700 16px var(--mono); fill: var(--text); }
+.it-text.semname.act .free-text { fill: var(--accent); }
+.it-cell.semval .cell-text { font: 700 20px var(--mono); }
+.it-cell.semval.pos .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 2; }
+.it-cell.semval.zero .cell-box { fill: var(--surface2); stroke: var(--node-line); stroke-width: 2; }
+.it-cell.semval.act .cell-box { stroke: var(--accent); stroke-width: 3; }
+.it-cell.qcell .cell-text, .it-cell.mark .cell-text { font: 700 13px var(--font); }
+.it-text.qnone .free-text { font: 500 13px var(--font); fill: var(--muted); font-style: italic; }
+
+/* program listings */
+.it-cell.codeline .cell-box { fill: transparent; stroke: transparent; }
+.it-cell.codeline .cell-text { font: 500 14px var(--mono); fill: var(--text); }
+.it-cell.codeline.act .cell-box { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.6; }
+.it-cell.codeline.act .cell-text { fill: var(--accent-deep); font-weight: 700; }
+.it-cell.codeline.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); stroke-width: 1.6; }
+.it-cell.mark.act .cell-box { stroke: var(--accent); stroke-width: 2.6; }
+.it-cell.swatch.s-new .cell-box, .it-cell.swatch.s-ready .cell-box, .it-cell.swatch.s-running .cell-box, .it-cell.swatch.s-blocked .cell-box { stroke-width: 2; }
+.it-line.legline .plain-line { stroke: var(--edge); stroke-width: 2.2; stroke-dasharray: 6 4; }
+.it-line.legline.hot .plain-line { stroke: var(--hot); stroke-width: 2.8; stroke-dasharray: none; }
+.it-cell.swatch.fork .cell-box { fill: var(--wire); stroke: var(--wire); }
+
+/* the banker's tables */
+.it-text.tbltitle .free-text { font: 700 14px var(--font); fill: var(--text); }
+.it-text.tbltitle.act .free-text { fill: var(--accent); }
+.it-text.colname .free-text, .it-text.rowname .free-text { font: 700 13px var(--font); fill: var(--muted); }
+.it-text.rowname .free-text { font-size: 14px; }
+.it-text.rowname.act .free-text { fill: var(--accent); }
+.it-text.rowname.good .free-text { fill: var(--good); }
+.it-text.vecname .free-text { font: 700 14px var(--font); fill: var(--text); }
+.it-cell.num .cell-text { font: 600 15px var(--mono); }
+.it-cell.num.good .cell-box, .it-cell.fin.yes .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 1.8; }
+.it-cell.num.good .cell-text, .it-cell.fin.yes .cell-text { fill: var(--good); font-weight: 700; }
+.it-cell.num.req .cell-box { fill: color-mix(in srgb, var(--s-ready) 14%, var(--node)); stroke: var(--s-ready); stroke-width: 1.8; }
+.it-cell.num.faded .cell-text, .it-cell.fin.faded .cell-text { fill: var(--muted); }
+.it-cell.num.faded .cell-box { fill: var(--surface2); stroke: var(--border); }
+.it-cell.fin .cell-text { font: 700 13px var(--mono); }
+.it-cell.fin.no .cell-box { fill: var(--surface2); stroke: var(--node-line); }
+.it-cell.fin.no .cell-text { fill: var(--muted); }
+.it-cell.seqcell .cell-box { fill: var(--good-soft); stroke: var(--good); stroke-width: 1.8; }
+.it-cell.seqcell .cell-text { fill: var(--good); font-weight: 700; font-size: 14px; }
+.it-cell.seqcell.hot .cell-box { fill: var(--hot-soft); stroke: var(--hot); }
+.it-cell.seqcell.hot .cell-text { fill: var(--hot-deep); }
+.it-text.seqarrow .free-text { fill: var(--muted); font-weight: 700; }
+.it-text.ledger .free-text { font: 500 14px var(--mono); fill: var(--text); }
+.it-text.ledger.act .free-text { fill: var(--accent); font-weight: 700; }
+.it-text.rowname.bad .free-text { fill: var(--hot-deep); }
