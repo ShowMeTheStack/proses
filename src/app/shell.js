@@ -8,7 +8,7 @@
   // other names a link may use for a page
   const ALIAS = { topic: 'topics', part: 'topics', lesson: 'learn', exercise: 'learn', tour: 'learn', course: 'courses', challenge: 'challenges', scenes: 'demo', lab: 'labs' };
   const frame = () => document.getElementById('app') || document.body;
-  const SIBLINGS = [['See', 'https://see.jyotiprakash.org'], ['Strux', 'https://strux.jyotiprakash.org'], ['Baysik', 'https://baysik.jyotiprakash.org'], ['Lohgo', 'https://lohgo.jyotiprakash.org'], ['Kwery', 'https://kwery.jyotiprakash.org'], ['Tooring', 'https://tooring.jyotiprakash.org'], ['Sirkit', 'https://sirkit.jyotiprakash.org'], ['Sifer', 'https://sifer.jyotiprakash.org'], ['Nooral', 'https://nooral.jyotiprakash.org']];
+  const SIBLINGS = [['See', 'https://see.jyotiprakash.org'], ['Strux', 'https://strux.jyotiprakash.org'], ['Baysik', 'https://baysik.jyotiprakash.org'], ['Lohgo', 'https://lohgo.jyotiprakash.org'], ['Kwery', 'https://kwery.jyotiprakash.org'], ['Tooring', 'https://tooring.jyotiprakash.org'], ['Sirkit', 'https://sirkit.jyotiprakash.org'], ['Sifer', 'https://sifer.jyotiprakash.org'], ['Nooral', 'https://nooral.jyotiprakash.org'], ['Arkitek', 'https://arkitek.jyotiprakash.org']];
 
   const Shell = (S.Shell = {
     NAV, ALIAS,
